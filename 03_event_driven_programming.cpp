@@ -89,6 +89,7 @@ void close()
 
 int main( int argc, char* args[] )
 {
+	system("meshlabserver -i ./Materials/box.STL -o ./test.obj");
 	//Start up SDL and create window
 	if( !init() )
 	{

@@ -4,9 +4,9 @@ Install meshlab using the following command:
 sudo apt-get install meshlab
 
 Type this in command line to convert from .stl to .obj:
-hlabserver -i [inputlocation] -o [outputlocation]
+meshlabserver -i [inputlocation] -o [outputlocation]
 
 Example:
 
-hlabserver -i ./Materials/box.STL -o ./test.obj
+meshlabserver -i ./Materials/box.STL -o ./test.obj
 
