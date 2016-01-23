@@ -15,7 +15,7 @@ LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
 OUTPUT_NAME = hello
 
 #INCLUDE FLAGS
-INCLUDE_FLAGS = -Ilib -Iinclude
+INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
 	 $(CC) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) -o $(OUTPUT_NAME) -pthread

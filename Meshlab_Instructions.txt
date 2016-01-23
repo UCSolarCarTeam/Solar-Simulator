@@ -10,3 +10,4 @@ Example:
 
 meshlabserver -i ./Materials/box.STL -o ./test.obj
 
+Note that glm libraries have to be copied into /usr/local/include/

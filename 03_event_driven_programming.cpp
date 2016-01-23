@@ -4,6 +4,9 @@ and may not be redistributed without written permission.*/
 //Using SDL and standard IO
 #include <SDL.h>
 #include <stdio.h>
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -17,7 +20,6 @@ bool loadMedia();
 
 //Frees media and shuts down SDL
 void close();
-
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 	
