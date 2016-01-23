@@ -4,6 +4,7 @@ and may not be redistributed without written permission.*/
 //Using SDL and standard IO
 #include <SDL.h>
 #include <stdio.h>
+#include "src/objectLoader.h"
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 
