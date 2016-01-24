@@ -7,6 +7,7 @@ and may not be redistributed without written permission.*/
 #include "src/objectLoader.h"
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
+#include <vector>
 
 
 //Screen dimension constants
@@ -93,6 +94,10 @@ void close()
 int main( int argc, char* args[] )
 {
 	system("meshlabserver -i ./Materials/box.STL -o ./test.obj");
+	std::vector<glm::vec3> vertices;
+	std::vector<glm::vec2> uvs;
+	std::vector<glm::vec3> normals; // Won't be used at the moment.
+	bool res = loadOBJ("test.obj", vertices, uvs, normals);
 	//Start up SDL and create window
 	if( !init() )
 	{
