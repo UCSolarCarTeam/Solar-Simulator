@@ -5,8 +5,9 @@ and may not be redistributed without written permission.*/
 #include <SDL.h>
 #include <stdio.h>
 #include "src/objectLoader.h"
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
+#include <string>
+
+#include <glm/glm.hpp>
 #include <vector>
 
 
@@ -97,7 +98,7 @@ int main( int argc, char* args[] )
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
-	bool res = loadOBJ("test.obj", vertices, uvs, normals);
+	bool res = loadObject("test.obj", vertices, uvs, normals);
 	//Start up SDL and create window
 	if( !init() )
 	{

@@ -1,5 +1,5 @@
 #OBJS = files to compile
-OBJS = 03_event_driven_programming.cpp 
+OBJS = 03_event_driven_programming.cpp src/objectLoader.cpp
 
 
 #CC = compiler used
