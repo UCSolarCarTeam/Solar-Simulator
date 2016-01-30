@@ -7,7 +7,6 @@
 #include <glm/glm.hpp>
 #include "objectLoader.h"
 
-// #include "objloader.hpp"
 // Here is a short list of features a real function would provide : 
 // - Binary files. Reading a model should be just a few memcpy's away, not parsing a file at runtime. In short : OBJ is not very great.
 // - Animations & bones (includes bones weights)
@@ -37,12 +36,14 @@ bool loadObject(
 		getchar();
 		return false;
 	}
-
+	int whileLoops = 0;
+	int commentLines = 0;
 	while( 1 ){
 
 		char lineHeader[128];
 		// read the first word of the line
 		int res = fscanf(file, "%s", lineHeader);
+		whileLoops++;
 		if (res == EOF)
 			break; // EOF = End Of File. Quit the loop.
 
@@ -67,6 +68,8 @@ bool loadObject(
 			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2] );
 			if (matches != 9){
 				printf("File can't be read by our simple parser :-( Try exporting with other options\n");
+				printf ("Loop ran: %d times\n", whileLoops);
+				printf ("Commented lines: %d \n", commentLines);
 				return false;
 			}
 			vertexIndices.push_back(vertexIndex[0]);
@@ -82,6 +85,7 @@ bool loadObject(
 			// Probably a comment, eat up the rest of the line
 			char stupidBuffer[1000];
 			fgets(stupidBuffer, 1000, file);
+			commentLines++;
 		}
 
 	}

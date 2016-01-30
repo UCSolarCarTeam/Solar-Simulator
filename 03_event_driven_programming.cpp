@@ -94,7 +94,7 @@ void close()
 
 int main( int argc, char* args[] )
 {
-	system("meshlabserver -i ./Materials/box.STL -o ./test.obj");
+	system("meshlabserver -i ./Materials/box.STL -o ./test.obj -om vn");
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
