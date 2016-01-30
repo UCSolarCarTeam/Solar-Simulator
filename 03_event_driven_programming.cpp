@@ -96,9 +96,15 @@ int main( int argc, char* args[] )
 {
 	system("meshlabserver -i ./Materials/box.STL -o ./test.obj -om vn");
 	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
-	bool res = loadObject("test.obj", vertices, uvs, normals);
+	bool res = loadObject("test.obj", vertices, normals);
+
+	printf("The following data was read from the object file:\n\n");
+	for (unsigned int i = 0; i < vertices.size(); i++)
+	{
+		printf("Triangle Face #: %d\nVertex Vector: %f %f %f\nNormal Vector: %f %f %f\n\n", i, vertices[i].x, vertices[i].y, vertices[i].z, normals[i].x, normals[i].y, normals[i].z);
+	}
+
 	//Start up SDL and create window
 	if( !init() )
 	{
