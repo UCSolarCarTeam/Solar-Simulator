@@ -6,10 +6,9 @@ OBJS = 03_event_driven_programming.cpp src/objectLoader.cpp
 CC = g++
 
 #COMPLIE_FLAGS = additional flags
-COMPILE_FLAGS = -w -g -std=c++0x
+COMPILE_FLAGS = -w -g -std=c++0x -Wall
 
-LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -ltiff  
-
+LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -ltiff
 
 #OUTPUT_NAME = final name
 OUTPUT_NAME = hello
@@ -18,7 +17,7 @@ OUTPUT_NAME = hello
 INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
-	 $(CC) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) -o $(OUTPUT_NAME) -pthread
+	 $(CC) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) -pthread
 
 clean :
 	rm hello
