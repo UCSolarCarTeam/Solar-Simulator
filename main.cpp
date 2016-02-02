@@ -1,68 +1,212 @@
-//This example program is created by thecplusplusuy for demonstration purposes. It's a simple 3D model loader (wavefront (.obj)), which is capable to load materials and UV textures:
-//http://www.youtube.com/user/thecplusplusguy
-//Free source, modify if you want, LGPL licence (I guess), I would be happy, if you would not delete the link
-//so other people can see the tutorial
-//this file is third.cpp an example, how to use the class
-#include "objloader.h"
+/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
+and may not be redistributed without written permission.*/
 
-float angle=0.0;
+//Using SDL and standard IO
+#include <SDL.h>
+#include <stdio.h>
+#include "src/objectLoader.h"
+#include <string>
+#include <SDL_opengl.h>
+#include <GL/glu.h>
+#include <glm/glm.hpp>
+#include <vector>
 
-int cube;
-objloader obj;	//create an instance of the objloader
-void init()
+
+//Screen dimension constants
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
+//Starts up SDL and creates window
+bool init();
+
+bool initGL();
+
+//Frees media and shuts down SDL
+void close();
+
+void render();
+
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+
+//The image we will load and show on the screen
+SDL_Surface* gXOut = NULL;
+
+SDL_GLContext gContext;
+bool gRenderQuad = true;
+
+bool init()
 {
-	glClearColor(0.5,0.5,0.5,1.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(45,640.0/480.0,1.0,500.0);
-	glMatrixMode(GL_MODELVIEW);
-	glEnable(GL_DEPTH_TEST);
-	cube=obj.load("test.obj");	//load it
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	float col[]={1.0,1.0,1.0,1.0};
-	glLightfv(GL_LIGHT0,GL_DIFFUSE,col);
-}
+	//Initialization flag
+	bool success = true;
 
-void display()
-{
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
-	float pos[]={-1.0,1.0,-2.0,1.0};
-	glLightfv(GL_LIGHT0,GL_POSITION,pos);
-	glTranslatef(0.0,-30.0,-100.0);
-	glCallList(cube);	//and display it
-}
-
-
-int main(int argc,char** argv)
-{
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Surface* screen=SDL_SetVideoMode(640,480,32,SDL_SWSURFACE|SDL_OPENGL);
-	bool running=true;
-	Uint32 start;
-	SDL_Event event;
-	init();
-	while(running)
+	//Initialize SDL
+	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
-		start=SDL_GetTicks();
-		while(SDL_PollEvent(&event))
+		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		success = false;
+	}
+	else
+	{
+		//OpenGL 2.1
+		SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
+        SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
+		//Create window
+		gWindow = SDL_CreateWindow( "Solar Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+		if( gWindow == NULL )
 		{
-			switch(event.type)
+			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+			success = false;
+		}
+		else
+		{
+			//Get window surface
+			gContext = SDL_GL_CreateContext( gWindow );
+			if (gContext == NULL)
 			{
-				case SDL_QUIT:
-					running=false;
-					break;
+				printf( "OpenGL context could not be created! SDL Error: %s\n", SDL_GetError() );
+                success = false;
+			}
+			else
+			{
+                //Use Vsync
+                if( SDL_GL_SetSwapInterval( 1 ) < 0 )
+                {
+                    printf( "Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError() );
+                }
+
+                //Initialize OpenGL
+                if( !initGL() )
+                {
+                    printf( "Unable to initialize OpenGL!\n" );
+                    success = false;
+                }
 			}
 		}
-		display();
-		SDL_GL_SwapBuffers();
-		angle+=0.5;
-		if(angle>360)
-			angle-=360;
-		if(1000/30>(SDL_GetTicks()-start))
-			SDL_Delay(1000/30-(SDL_GetTicks()-start));
 	}
+
+	return success;
+}
+
+bool initGL()
+{
+    bool success = true;
+    GLenum error = GL_NO_ERROR;
+
+    //Initialize Projection Matrix
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    
+    //Check for error
+    error = glGetError();
+    if( error != GL_NO_ERROR )
+    {
+        printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
+        success = false;
+    }
+
+    //Initialize Modelview Matrix
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+
+    //Check for error
+    error = glGetError();
+    if( error != GL_NO_ERROR )
+    {
+        printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
+        success = false;
+    }
+        //Initialize clear color
+    glClearColor( 0.f, 0.f, 0.f, 1.f );
+    
+    //Check for error
+    error = glGetError();
+    if( error != GL_NO_ERROR )
+    {
+        printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
+        success = false;
+    }
+    
+    return success;
+}
+
+void render()
+{
+	//Clear color buffer
+	glClear( GL_COLOR_BUFFER_BIT );
+	
+	//Render quad
+	if( gRenderQuad )
+	{
+		glBegin( GL_QUADS );
+			glVertex2f( -0.5f, -0.5f );
+			glVertex2f( 0.5f, -0.5f );
+			glVertex2f( 0.5f, 0.5f );
+			glVertex2f( -0.5f, 0.5f );
+		glEnd();
+	}
+}
+
+void close()
+{
+	//Deallocate surface
+	SDL_FreeSurface( gXOut );
+	gXOut = NULL;
+
+	//Destroy window
+	SDL_DestroyWindow( gWindow );
+	gWindow = NULL;
+
+	//Quit SDL subsystems
 	SDL_Quit();
-	return 0;	
+}
+
+int main( int argc, char* args[] )
+{
+	system("meshlabserver -i ./Materials/box.STL -o ./test.obj -om vn");
+	std::vector<glm::vec3> vertices;
+	std::vector<glm::vec3> normals; // Won't be used at the moment.
+	bool res = loadObject("test.obj", vertices, normals);
+
+	printf("The following data was read from the object file:\n\n");
+	for (unsigned int i = 0; i < vertices.size(); i++)
+	{
+		printf("Triangle Face #: %d\nVertex Vector: %f %f %f\nNormal Vector: %f %f %f\n\n", i, vertices[i].x, vertices[i].y, vertices[i].z, normals[i].x, normals[i].y, normals[i].z);
+	}
+
+	//Start up SDL and create window
+	if( !init() )
+	{
+		printf( "Failed to initialize!\n" );
+	}
+	else
+	{		
+			//Main loop flag
+			bool quit = false;
+
+			//Event handler
+			SDL_Event e;
+
+			//While application is running
+			while( !quit )
+			{
+				//Handle events on queue
+				while( SDL_PollEvent( &e ) != 0 )
+				{
+					//User requests quit
+					if( e.type == SDL_QUIT )
+					{
+						quit = true;
+					}
+				}
+				render();
+				SDL_GL_SwapWindow(gWindow);
+			}
+	}
+
+	//Free resources and close SDL
+	close();
+
+	return 0;
 }
