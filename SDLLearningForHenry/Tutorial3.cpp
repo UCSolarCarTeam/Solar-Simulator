@@ -4,12 +4,6 @@ and may not be redistributed without written permission.*/
 //Using SDL and standard IO
 #include <SDL.h>
 #include <stdio.h>
-#include "src/objectLoader.h"
-#include <string>
-
-#include <glm/glm.hpp>
-#include <vector>
-
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -23,9 +17,10 @@ bool loadMedia();
 
 //Frees media and shuts down SDL
 void close();
+
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
-	
+
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
@@ -68,10 +63,10 @@ bool loadMedia()
 	bool success = true;
 
 	//Load splash image
-	gXOut = SDL_LoadBMP( "x.bmp" );
+	gXOut = SDL_LoadBMP( "SDLLearningForHenry/x.bmp" );
 	if( gXOut == NULL )
 	{
-		printf( "Unable to load image %s! SDL Error: %s\n", "x.bmp", SDL_GetError() );
+		printf( "Unable to load image %s! SDL Error: %s\n", "SDLLearningForHenry/x.bmp", SDL_GetError() );
 		success = false;
 	}
 
@@ -94,17 +89,6 @@ void close()
 
 int main( int argc, char* args[] )
 {
-	system("meshlabserver -i ./Materials/box.STL -o ./test.obj -om vn");
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec3> normals; // Won't be used at the moment.
-	bool res = loadObject("test.obj", vertices, normals);
-
-	printf("The following data was read from the object file:\n\n");
-	for (unsigned int i = 0; i < vertices.size(); i++)
-	{
-		printf("Triangle Face #: %d\nVertex Vector: %f %f %f\nNormal Vector: %f %f %f\n\n", i, vertices[i].x, vertices[i].y, vertices[i].z, normals[i].x, normals[i].y, normals[i].z);
-	}
-
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -118,7 +102,7 @@ int main( int argc, char* args[] )
 			printf( "Failed to load media!\n" );
 		}
 		else
-		{			
+		{
 			//Main loop flag
 			bool quit = false;
 
@@ -140,7 +124,7 @@ int main( int argc, char* args[] )
 
 				//Apply the image
 				SDL_BlitSurface( gXOut, NULL, gScreenSurface, NULL );
-			
+
 				//Update the surface
 				SDL_UpdateWindowSurface( gWindow );
 			}

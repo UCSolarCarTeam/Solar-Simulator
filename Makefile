@@ -1,6 +1,5 @@
 #OBJS = files to compile
-OBJS = 03_event_driven_programming.cpp src/objectLoader.cpp
-
+OBJS = SDLLearningForHenry/Tutorial3.cpp
 
 #CC = compiler used
 CC = g++
