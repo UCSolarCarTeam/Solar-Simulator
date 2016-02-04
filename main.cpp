@@ -50,10 +50,13 @@ bool init()
 	else
 	{
 		//OpenGL 2.1
-		SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
-        SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
+		SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3 );
+        SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 2 );
+
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+ 	    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		//Create window
-		gWindow = SDL_CreateWindow( "Solar Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+		gWindow = SDL_CreateWindow( "Solar Simulation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -71,17 +74,17 @@ bool init()
 			else
 			{
                 //Use Vsync
-                if( SDL_GL_SetSwapInterval( 1 ) < 0 )
+                if( SDL_GL_SetSwapInterval(1) < 0 )
                 {
                     printf( "Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError() );
                 }
 
                 //Initialize OpenGL
-                if( !initGL() )
-                {
-                    printf( "Unable to initialize OpenGL!\n" );
-                    success = false;
-                }
+                // if( !initGL() )
+                // {
+                //     printf( "Unable to initialize OpenGL!\n" );
+                //     success = false;
+                // }
 			}
 		}
 	}
