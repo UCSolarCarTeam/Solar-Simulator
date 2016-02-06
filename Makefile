@@ -8,7 +8,7 @@ CC = g++
 #COMPLIE_FLAGS = additional flags
 COMPILE_FLAGS = -w -g -std=c++0x -Wall
 
-LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -ltiff -lGL -lGLU
+LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGL -lGLU 
 
 #OUTPUT_NAME = final name
 OUTPUT_NAME = hello
