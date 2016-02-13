@@ -1,1 +1,0 @@
-# Solar-Simulation-SDL

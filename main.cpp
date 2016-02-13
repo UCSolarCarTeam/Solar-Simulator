@@ -13,7 +13,7 @@ int main()
 	Mesh mesh (vertices, sizeOf(vertices)/sizeof(vertices[0]));
 	while(!display.isClosed())
 	{
-		display.Clear(0, 0f, 0.15f, 0.3f, 1.0f)
+		display.Clear(0, 0f, 0.15f, 0.3f, 1.0f);
 		mesh.Draw();
 		display.Update();
 	}
