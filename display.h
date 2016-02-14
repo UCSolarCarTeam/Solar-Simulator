@@ -15,9 +15,11 @@ public:
 protected:
 private:
 	Display(const Display& other);
-	void operator=(const Display& other);
+	void operator=(const Display& other) {}
+
 	SDL_Window* m_window;
 	bool m_isClosed;
+	SDL_GLContext m_glContext;
 };
 
 #endif 

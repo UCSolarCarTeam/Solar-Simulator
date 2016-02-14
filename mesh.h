@@ -6,7 +6,7 @@
 
 class Vertex{
 	public:
-		Vertex(const glm::Vec3& pos)
+		Vertex(const glm::vec3& pos)
 		{
 			this->pos = pos;
 		}
@@ -24,7 +24,7 @@ class Mesh
 	protected:
 	private:
 		Mesh(const Mesh& other);
-		void operator=(const Mesh& other);
+		void operator=(const Mesh& other) {}
 		enum{
 			POSITION_VB,
 			NUM_BUFFERS

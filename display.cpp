@@ -15,7 +15,7 @@ Display::Display(int width, int height, const std::string& title)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); //Space for second window to be drawn on 
 
 	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL); //SDL takes in a C string
-	m_window = SDL_GL_CreateContext(m_window);
+	m_glContext = SDL_GL_CreateContext(m_window);
 
 	GLenum status = glewInit();
 	if(status != GLEW_OK)
@@ -27,7 +27,7 @@ Display::Display(int width, int height, const std::string& title)
 
 bool Display::IsClosed()
 {
-	return m_isClosed();
+	return m_isClosed;
 }
 
 void Display::Clear(float red, float green, float blue, float alpha)
