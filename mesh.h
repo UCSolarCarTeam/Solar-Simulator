@@ -17,7 +17,7 @@ class Vertex{
 class Mesh
 {
 	public:
-		Mesh(Vertex* vertices, unsigned int numVertices);
+		Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
 		void Draw();
 		virtual ~Mesh();
 
@@ -27,12 +27,13 @@ class Mesh
 		void operator=(const Mesh& other) {}
 		enum{
 			POSITION_VB,
+			INDEX_VB,
 			NUM_BUFFERS
 		};
 
 		GLuint m_vertexArrayObject;
 		GLuint m_vertexArrayBuffers[NUM_BUFFERS];
-		unsigned int m_drawCount;
+		unsigned int m_drawCount; //Number of drawn indices
 };
 
 #endif 
