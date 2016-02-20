@@ -1,0 +1,13 @@
+INSTRUCTIONS TO CONVERT .STL TO .obj
+
+Install meshlab using the following command:
+sudo apt-get install meshlab
+
+Type this in command line to convert from .stl to .obj:
+meshlabserver -i [inputlocation] -o [outputlocation]
+
+Example:
+
+meshlabserver -i ./Materials/box.STL -o ./test.obj
+
+Note that glm libraries have to be copied into /usr/local/include/
