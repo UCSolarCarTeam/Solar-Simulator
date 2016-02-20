@@ -92,7 +92,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load texture
-	gTexture = loadTexture( "09_the_viewport/viewport.png" );
+	gTexture = loadTexture( "SDLLearningForHenry/viewport.png" );
 	if( gTexture == NULL )
 	{
 		printf( "Failed to load texture image!\n" );
@@ -109,7 +109,7 @@ void close()
 	SDL_DestroyTexture( gTexture );
 	gTexture = NULL;
 
-	//Destroy window	
+	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
@@ -162,7 +162,7 @@ int main( int argc, char* args[] )
 			printf( "Failed to load media!\n" );
 		}
 		else
-		{	
+		{
 			//Main loop flag
 			bool quit = false;
 
@@ -193,7 +193,7 @@ int main( int argc, char* args[] )
 				topLeftViewport.w = SCREEN_WIDTH / 2;
 				topLeftViewport.h = SCREEN_HEIGHT / 2;
 				SDL_RenderSetViewport( gRenderer, &topLeftViewport );
-				
+
 				//Render texture to screen
 				SDL_RenderCopy( gRenderer, gTexture, NULL, NULL );
 
@@ -205,7 +205,7 @@ int main( int argc, char* args[] )
 				topRightViewport.w = SCREEN_WIDTH / 2;
 				topRightViewport.h = SCREEN_HEIGHT / 2;
 				SDL_RenderSetViewport( gRenderer, &topRightViewport );
-				
+
 				//Render texture to screen
 				SDL_RenderCopy( gRenderer, gTexture, NULL, NULL );
 
@@ -218,7 +218,7 @@ int main( int argc, char* args[] )
 				bottomViewport.h = SCREEN_HEIGHT / 2;
 				SDL_RenderSetViewport( gRenderer, &bottomViewport );
 
-				
+
 				//Render texture to screen
 				SDL_RenderCopy( gRenderer, gTexture, NULL, NULL );
 

@@ -1,6 +1,5 @@
 #OBJS = files to compile
 OBJS = SDLLearningForHenry/solarSimulationWindow.cpp
-
 #CC = compiler used
 CC = g++
 
