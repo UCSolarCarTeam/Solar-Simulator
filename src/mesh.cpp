@@ -7,7 +7,7 @@ Mesh::Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices,
 	glBindVertexArray(m_vertexArrayObject);
 	glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-	glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(vertices[0]), vertices, GL_STATIC_DRAW); //STATIC DATA
+	glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(vertices[0]), vertices, GL_STATIC_DRAW); //SINCE STATIC DATA IS BEING USED
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
@@ -25,8 +25,6 @@ void Mesh::Draw()
 {
 	glBindVertexArray(m_vertexArrayObject);
 	glDrawElements(GL_TRIANGLES, m_drawCount, GL_UNSIGNED_INT, 0);
-	//glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
-
 
 	glBindVertexArray(0);
 }

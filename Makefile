@@ -1,5 +1,5 @@
 #OBJS = files to compile
-OBJS = main.cpp src/objectLoader.cpp
+OBJS = src/*.cpp 
 
 
 #CC = compiler used
@@ -8,7 +8,7 @@ CC = g++
 #COMPLIE_FLAGS = additional flags
 COMPILE_FLAGS = -w -g -std=c++0x -Wall
 
-LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGL -lGLU 
+LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU
 
 #OUTPUT_NAME = final name
 OUTPUT_NAME = hello

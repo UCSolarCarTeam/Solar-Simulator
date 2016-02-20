@@ -1,4 +1,3 @@
-// Very, VERY simple OBJ loader.
 #include <vector>
 #include <stdio.h>
 #include <string>
@@ -6,6 +5,7 @@
 
 #include <glm/glm.hpp>
 #include "objectLoader.h"
+#include "mesh.h"
 
 // Here is a short list of features a real function would provide : 
 // - Binary files. Reading a model should be just a few memcpy's away, not parsing a file at runtime. In short : OBJ is not very great.
@@ -16,9 +16,9 @@
 // - More secure. Change another line and you can inject code.
 // - Loading from memory, stream, etc
 
-bool loadObject(
+int loadObject(
 	const char * path, 
-	std::vector<glm::vec3> & out_vertices, 
+	std::vector<glm::vec3> & out_vertices,
 	std::vector<glm::vec3> & out_normals
 ){
 	printf("Loading OBJ file %s...\n", path);
@@ -31,7 +31,7 @@ bool loadObject(
 	if( file == NULL ){
 		printf("Error! Unable to open file. Please check that the correct directory has been specified.\n");
 		getchar();
-		return false;
+		return -1;
 	}
 	int whileLoops = 0;
 	int commentLines = 0;
@@ -58,7 +58,7 @@ bool loadObject(
 				printf("The file could not be read by our parser! Try exporting with other options.\n");
 				printf ("The loop ran: %d times\n", whileLoops);
 				printf ("Commented lines: %d \n", commentLines);
-				return false;
+				return -1;
 			}
 			vertexIndices.push_back(vertexIndex[0]);
 			vertexIndices.push_back(vertexIndex[1]);
@@ -87,10 +87,10 @@ bool loadObject(
 		
 		// Put the attributes in buffers
 		out_vertices.push_back(vertex);
-		out_normals .push_back(normal);
+		//out_normals .push_back(normal);
 	
 	}
 	printf("The .obj file was loaded successfully! \n");
-	return true;
+	return vertexIndices.size();
 }
 
