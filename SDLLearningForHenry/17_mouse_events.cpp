@@ -404,7 +404,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load sprites
-	if( !gButtonSpriteSheetTexture.loadFromFile( "SDLL/button.png" ) )
+	if( !gButtonSpriteSheetTexture.loadFromFile( "SDLLearningForHenry/button.png" ) )
 	{
 		printf( "Failed to load button sprite texture!\n" );
 		success = false;
