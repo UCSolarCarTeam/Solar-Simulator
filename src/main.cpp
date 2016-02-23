@@ -1,12 +1,14 @@
 #include <iostream>
+#include <vector>
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+
 #include "display.h"
 #include "mesh.h"
+#include "objectLoader.h"
 #include "shader.h"
 #include "transform.h"
-#include "objectLoader.h"
-#include <vector>
 
 float getGreatestValue(glm::vec3 * verticesArray, unsigned int size);
 
