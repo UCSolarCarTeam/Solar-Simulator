@@ -10,7 +10,7 @@
 #include "Shader.h"
 #include "Transform.h"
 
-float getGreatestValue(glm::vec3 * verticesArray, unsigned int size);
+float getGreatestValue(glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
@@ -19,8 +19,8 @@ int main(int argc, char **argv)
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
 	unsigned int numVertices = loadObject("test2.obj", vertices, normals);
-	glm::vec3 * verticesArray = &vertices[0];
-	unsigned int * indices = new unsigned int[numVertices];
+	glm::vec3* verticesArray = &vertices[0];
+	unsigned int* indices = new unsigned int[numVertices];
 	for (unsigned int i = 0; i < numVertices; i++)
 	{
 		indices[i] = i;
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-float getGreatestValue(glm::vec3 * verticesArray, unsigned int size)
+float getGreatestValue(glm::vec3* verticesArray, unsigned int size)
 {
 	float greatestValue = 0;
 	for (unsigned int i = 0; i < size; i++)
