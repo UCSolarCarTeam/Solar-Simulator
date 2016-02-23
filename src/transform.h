@@ -8,39 +8,38 @@
 class Transform
 {
 public:
-	Transform(const glm::vec3& pos = glm::vec3(), const glm::vec3& rot = glm::vec3(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f))
-	{
-		this->m_pos = pos;
-		this->m_rot = rot;
-		this->m_scale = scale;
-	}
+	Transform(const glm::vec3& position = glm::vec3(), 
+			  const glm::vec3& rotation = glm::vec3(), 
+			  const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f))
+	
+	: position_(position)
+	, rotation_(rotation)
+	, scale_(scale)
+	{ }
 
 	inline glm::mat4 GetModel() const
 	{
-		glm::mat4 posMatrix = glm::translate(m_pos); //convert transformations into matrix
-		glm::mat4 scaleMatrix = glm::scale(m_scale);
-		glm::mat4 rotXMatrix = glm::rotate(m_rot.x, glm::vec3(1, 0, 0));
-		glm::mat4 rotYMatrix = glm::rotate(m_rot.y, glm::vec3(0, 1, 0));
-		glm::mat4 rotZMatrix = glm::rotate(m_rot.z, glm::vec3(0, 0, 1));
+		glm::mat4 posMatrix = glm::translate(position_); //convert transformations into matrix
+		glm::mat4 scaleMatrix = glm::scale(scale_);
+		glm::mat4 rotXMatrix = glm::rotate(rotation_.x, glm::vec3(1, 0, 0));
+		glm::mat4 rotYMatrix = glm::rotate(rotation_.y, glm::vec3(0, 1, 0));
+		glm::mat4 rotZMatrix = glm::rotate(rotation_.z, glm::vec3(0, 0, 1));
 		glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
 		return (posMatrix * rotMatrix * scaleMatrix);
-
 	}
 
-	inline glm::vec3* GetPos() { return &m_pos; }
-	inline glm::vec3* GetRot() { return &m_rot; }
-	inline glm::vec3* GetScale() { return &m_scale; }
+	inline glm::vec3* getPos() { return &position_; }
+	inline glm::vec3* getRot() { return &rotation_; }
+	inline glm::vec3* getScale() { return &scale_; }
 
-	inline void SetPos(glm::vec3& pos) { this->m_pos = pos; }
-	inline void SetRot(glm::vec3& rot) { this->m_rot = rot; }
-	inline void SetScale(glm::vec3& scale) { this->m_scale = scale; }
+	inline void setPos(glm::vec3& position) { position_ = position; }
+	inline void setRot(glm::vec3& rotation) { rotation_ = rotation; }
+	inline void setScale(glm::vec3& scale) { scale_ = scale; }
 
-
-protected:
 private:
-	glm::vec3 m_pos;
-	glm::vec3 m_rot;
-	glm::vec3 m_scale;
+	glm::vec3 position_;
+	glm::vec3 rotation_;
+	glm::vec3 scale_;
 };
 
 #endif

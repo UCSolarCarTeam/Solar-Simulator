@@ -36,17 +36,17 @@ int main(int argc, char **argv)
 
 	float counter = 0.0f;
 
-	transform.GetScale()->x = 1 / (scale);
-	transform.GetScale()->y = 1 / (scale);
-	transform.GetScale()->z = 1 / (scale);
+	transform.getScale()->x = 1 / (scale);
+	transform.getScale()->y = 1 / (scale);
+	transform.getScale()->z = 1 / (scale);
 
 	while(!display.IsClosed())
 	{
 		display.Clear(0.0f, 0.15f, 0.3f, 1.0f);
 		
-		transform.GetRot()->y = counter; //rotate about the y-axis
-		transform.GetRot()->z = counter;
-		transform.GetRot()->x = counter;
+		transform.getRot()->y = counter; //rotate about the y-axis
+		transform.getRot()->z = counter;
+		transform.getRot()->x = counter;
 		
 		shader.Bind();
 		shader.Update(transform);
