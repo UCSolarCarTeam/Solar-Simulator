@@ -17,7 +17,7 @@ OUTPUT_NAME = SolarSimulator
 INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
-    $(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) 
+	$(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) 
 
 clean :
-    rm $(OUTPUT_NAME)
+	rm $(OUTPUT_NAME)
