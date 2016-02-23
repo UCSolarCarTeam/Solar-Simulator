@@ -18,9 +18,9 @@ int main(int argc, char **argv)
 
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals; // Won't be used at the moment.
-    unsigned int numVertices = loadObject("test2.obj", vertices, normals);
+    unsigned int numVertices = loadObject("samples/test2.obj", vertices, normals);
     glm::vec3* verticesArray = &vertices[0];
-    unsigned int* indices = new unsigned int[numVertices];
+    unsigned int indices[numVertices];
     for (unsigned int i = 0; i < numVertices; i++)
     {
         indices[i] = i;
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
     std::cout << "The greatest value is " << scale << std::endl;
     std::cout << "Number of faces: " << (numVertices + 1) / 3 << std::endl;
-    Shader shader("./res/basicShader");
+    Shader shader("./shaders/basicShader");
     Mesh mesh(verticesArray, numVertices, indices, (numVertices + 1) / 3);
     Transform transform;
 

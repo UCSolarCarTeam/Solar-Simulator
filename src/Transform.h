@@ -16,7 +16,7 @@ public:
         , scale_(scale)
     { }
 
-    virtual ~Transform();
+    virtual ~Transform() {};
     Transform(const Transform&) = delete;
     void operator=(const Transform&) = delete;
 
