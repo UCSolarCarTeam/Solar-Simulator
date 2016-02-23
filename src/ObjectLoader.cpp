@@ -41,7 +41,7 @@ int loadObject(const char* path,
     for (;;)
     {
         char lineHeader[128];
-        int res = fscanf(file, "%s", lineHeader);// read the first word of the line
+        int res = fscanf(file, "%127s", lineHeader);// read the first word of the line
         whileLoops++;
         if (res == EOF) {
             break; // EOF = End Of File. Quit the loop.
