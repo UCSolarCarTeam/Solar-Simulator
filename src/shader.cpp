@@ -85,7 +85,7 @@ void Shader::Bind()
 
 void Shader::Update(const Transform& transform)
 {
-	glm::mat4 model = transform.GetModel();
+	glm::mat4 model = transform.getModel();
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GLU_FALSE, &model[0][0]);
 }
 

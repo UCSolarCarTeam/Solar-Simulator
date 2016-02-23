@@ -17,7 +17,7 @@ public:
 	, scale_(scale)
 	{ }
 
-	inline glm::mat4 GetModel() const
+	inline glm::mat4 getModel() const
 	{
 		glm::mat4 posMatrix = glm::translate(position_); //convert transformations into matrix
 		glm::mat4 scaleMatrix = glm::scale(scale_);
