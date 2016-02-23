@@ -1,6 +1,5 @@
 #include <iostream>
 
-#define GLM_FORCE_RADIANS
 #include <GL/glew.h>
 
 #include "display.h"
