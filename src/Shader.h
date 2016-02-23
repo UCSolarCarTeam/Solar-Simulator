@@ -5,7 +5,7 @@
 
 #include <GL/glew.h>
 
-#include "transform.h"
+#include "Transform.h"
 
 class Shader
 {

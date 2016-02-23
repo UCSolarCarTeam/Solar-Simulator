@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "shader.h"
+#include "Shader.h"
 
 Shader::Shader(const std::string& fileName) 
 {

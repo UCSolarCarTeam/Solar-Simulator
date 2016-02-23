@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "mesh.h"
+#include "Mesh.h"
 
 Mesh::Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
 : drawCount_(numVertices)

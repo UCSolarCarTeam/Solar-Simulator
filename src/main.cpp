@@ -4,11 +4,11 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include "display.h"
-#include "mesh.h"
-#include "objectLoader.h"
-#include "shader.h"
-#include "transform.h"
+#include "Display.h"
+#include "Mesh.h"
+#include "ObjectLoader.h"
+#include "Shader.h"
+#include "Transform.h"
 
 float getGreatestValue(glm::vec3 * verticesArray, unsigned int size);
 

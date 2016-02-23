@@ -5,8 +5,8 @@
 
 #include <glm/glm.hpp>
 
-#include "objectLoader.h"
-#include "mesh.h"
+#include "ObjectLoader.h"
+#include "Mesh.h"
 
 /**
  * Here is a short list of features a real function would provide : 
