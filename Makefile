@@ -5,7 +5,7 @@ OBJS = src/*.cpp
 CXX = g++
 
 # Additional Flags
-COMPILE_FLAGS = -w -g -std=c++0x -Wall
+COMPILE_FLAGS = -w -g -std=c++0x -Werror
 
 # Required Libraries to Link
 LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU -pthread
