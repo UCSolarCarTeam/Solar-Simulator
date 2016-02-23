@@ -7,20 +7,20 @@
 class Mesh
 {
 public:
-	Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
-	virtual ~Mesh();
-	void Draw();
+    Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
+    virtual ~Mesh();
+    void Draw();
 
 private:
-	enum
-	{
-		POSITION_VB,
-		INDEX_VB,
-		NUM_BUFFERS
-	};
-	GLuint vertexArrayObject_;
-	GLuint vertexArrayBuffers_[NUM_BUFFERS];
-	unsigned int drawCount_;
+    enum
+    {
+        POSITION_VB,
+        INDEX_VB,
+        NUM_BUFFERS
+    };
+    GLuint vertexArrayObject_;
+    GLuint vertexArrayBuffers_[NUM_BUFFERS];
+    unsigned int drawCount_;
 };
 
 #endif
