@@ -5,32 +5,32 @@
 
 Shader::Shader(const std::string& fileName) 
 {
-	m_program = glCreateProgram();
-	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+	program_ = glCreateProgram();
+	shaders_[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
+	shaders_[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
 
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
-		glAttachShader(m_program, m_shaders[i]);
+		glAttachShader(program_, shaders_[i]);
 
-	glBindAttribLocation(m_program, 0, "position");
+	glBindAttribLocation(program_, 0, "position");
 
-	glLinkProgram(m_program);
-	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed:");
+	glLinkProgram(program_);
+	CheckShaderError(program_, GL_LINK_STATUS, true, "Error: Program linking failed:");
 
-	glValidateProgram(m_program);
-	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program is invalid");
+	glValidateProgram(program_);
+	CheckShaderError(program_, GL_LINK_STATUS, true, "Error: Program is invalid");
 
-	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform"); //gain access to transform uniform
+	uniforms_[TRANSFORM_U] = glGetUniformLocation(program_, "transform"); //gain access to transform uniform
 }
 
 Shader::~Shader()
 {
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 	{
-		glDetachShader(m_program, m_shaders[i]);
-		glDeleteShader(m_shaders[i]);
+		glDetachShader(program_, shaders_[i]);
+		glDeleteShader(shaders_[i]);
 	}
-	glDeleteProgram(m_program);
+	glDeleteProgram(program_);
 }
 
 GLuint Shader::CreateShader(const std::string& text, unsigned int type)
@@ -80,13 +80,13 @@ std::string Shader::LoadShader(const std::string& fileName)
 
 void Shader::Bind() 
 {
-	glUseProgram(m_program);
+	glUseProgram(program_);
 }
 
 void Shader::Update(const Transform& transform)
 {
 	glm::mat4 model = transform.getModel();
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GLU_FALSE, &model[0][0]);
+	glUniformMatrix4fv(uniforms_[TRANSFORM_U], 1, GLU_FALSE, &model[0][0]);
 }
 
 void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)

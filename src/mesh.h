@@ -12,8 +12,6 @@ public:
 	void Draw();
 
 private:
-	Mesh(const Mesh& other);
-	void operator=(const Mesh& other) {}
 	enum
 	{
 		POSITION_VB,

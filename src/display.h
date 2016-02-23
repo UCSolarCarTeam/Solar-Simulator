@@ -9,15 +9,13 @@ class Display
 {
 public:
 	Display(int width, int height, const std::string& title);
+	virtual ~Display();
+
 	void Update();
 	bool IsClosed();
 	void Clear(float red, float green, float blue, float alpha);
-	virtual ~Display();
 
 private:
-	Display(const Display& other);
-	void operator=(const Display& other) {}
-
 	SDL_Window* window_;
 	bool isClosed_;
 	SDL_GLContext glContext_;

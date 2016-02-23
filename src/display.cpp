@@ -26,15 +26,11 @@ Display::Display(int width, int height, const std::string& title)
 	isClosed_ = false;
 }
 
-bool Display::IsClosed()
+Display::~Display()
 {
-	return isClosed_;
-}
-
-void Display::Clear(float red, float green, float blue, float alpha)
-{
-	glClearColor(red, green, blue, alpha);
-	glClear(GL_COLOR_BUFFER_BIT);
+	SDL_GL_DeleteContext(glContext_);
+	SDL_DestroyWindow(window_);
+	SDL_Quit();
 }
 
 void Display::Update() //swaps buffers
@@ -52,9 +48,13 @@ void Display::Update() //swaps buffers
 	}
 }
 
-Display::~Display()
+bool Display::IsClosed()
 {
-	SDL_GL_DeleteContext(glContext_);
-	SDL_DestroyWindow(window_);
-	SDL_Quit();
+	return isClosed_;
+}
+
+void Display::Clear(float red, float green, float blue, float alpha)
+{
+	glClearColor(red, green, blue, alpha);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
