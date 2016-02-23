@@ -12,14 +12,14 @@ public:
 	bool IsClosed();
 	void Clear(float red, float green, float blue, float alpha);
 	virtual ~Display();
-protected:
+
 private:
 	Display(const Display& other);
 	void operator=(const Display& other) {}
 
-	SDL_Window* m_window;
-	bool m_isClosed;
-	SDL_GLContext m_glContext;
+	SDL_Window* window_;
+	bool isClosed_;
+	SDL_GLContext glContext_;
 };
 
 #endif 
