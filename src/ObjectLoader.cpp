@@ -97,4 +97,3 @@ int loadObject(const char* path,
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return vertexIndices.size();
 }
-
