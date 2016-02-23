@@ -16,14 +16,6 @@ int main(int argc, char **argv)
 {
 	Display display (800, 600, "Solar Simulator");
 
-	/*glm::vec3 verticesArray[] = { (glm::vec3(-0.5, -0.5, 0)), //OpenGL coordinates are from -1 to 1
-						 (glm::vec3(0, 0.5, 0)),
-						 (glm::vec3(0, -0.5, 0)),
-						(glm::vec3(-0.5, -0.5, 0.5)),
-						(glm::vec3(0, 0.5, 0.5)),
-						(glm::vec3(0.5, -0.5, 0.5))};
-
-	unsigned int indices[] = { 0, 1 , 2, 3, 4, 5};*/
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
 	unsigned int numVertices = loadObject("test2.obj", vertices, normals);
@@ -33,10 +25,6 @@ int main(int argc, char **argv)
 	{
 		indices[i] = i;
 	}
-	/*for (int i = 0; i < numVertices; i++)
-	{
-		printf("Vertex %d: %f %f %f\n", i, verticesArray[i].x, verticesArray[i].y, verticesArray[i].z);
-	}*/
 
 	float scale = getGreatestValue(verticesArray, numVertices);
 
@@ -63,13 +51,6 @@ int main(int argc, char **argv)
 		shader.Bind();
 		shader.Update(transform);
 		mesh.Draw();
-
-		/*glPointSize(10);
-		glBegin(GL_POINTS);
-		glVertex3f(1, 0, 0);
-		glVertex3f(0, 1, 0);
-		glVertex3f(0, 0, 1);
-		glEnd();*/
 
 		display.Update();
 		counter += 0.0002f;
