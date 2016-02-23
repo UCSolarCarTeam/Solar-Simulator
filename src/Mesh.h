@@ -9,6 +9,9 @@ class Mesh
 public:
     Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
     virtual ~Mesh();
+    Mesh(const Mesh&) = delete;
+    void operator=(const Mesh&) = delete;
+
     void Draw();
 
 private:

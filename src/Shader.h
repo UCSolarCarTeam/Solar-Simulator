@@ -12,6 +12,9 @@ class Shader
 public:
     Shader(const std::string& fileName);
     virtual ~Shader();
+    Shader(const Shader&) = delete;
+    void operator=(const Shader&) = delete;
+
     void Bind();
     void Update(const Transform& transform);
 

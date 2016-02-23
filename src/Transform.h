@@ -16,6 +16,11 @@ public:
         , scale_(scale)
     { }
 
+    virtual ~Transform();
+    Transform(const Transform&) = delete;
+    void operator=(const Transform&) = delete;
+
+
     inline glm::mat4 getModel() const
     {
         glm::mat4 posMatrix = glm::translate(position_); //convert transformations into matrix

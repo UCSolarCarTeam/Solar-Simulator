@@ -8,17 +8,19 @@
 class Display
 {
 public:
-	Display(int width, int height, const std::string& title);
-	virtual ~Display();
+    Display(int width, int height, const std::string& title);
+    virtual ~Display();
+    Display(const Display&) = delete;
+    void operator=(const Display&) = delete;
 
-	void Update();
-	bool IsClosed();
-	void Clear(float red, float green, float blue, float alpha);
+    void Update();
+    bool IsClosed();
+    void Clear(float red, float green, float blue, float alpha);
 
 private:
-	SDL_Window* window_;
-	bool isClosed_;
-	SDL_GLContext glContext_;
+    SDL_Window* window_;
+    bool isClosed_;
+    SDL_GLContext glContext_;
 };
 
-#endif 
+#endif
