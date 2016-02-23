@@ -28,8 +28,8 @@ int main(int argc, char **argv)
 
 	float scale = getGreatestValue(verticesArray, numVertices);
 
-	printf("The greatest value is %f \n", scale);
-	printf("Number of faces: %d\n", ((numVertices + 1)/3));
+	std::cout << "The greatest value is " << scale << std::endl;
+	std::cout << "Number of faces: " << (numVertices + 1)/3 << std::endl;
 	Shader shader("./res/basicShader");
 	Mesh mesh(verticesArray, numVertices, indices, (numVertices + 1)/3);
 	Transform transform;
