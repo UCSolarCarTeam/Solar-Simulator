@@ -8,7 +8,7 @@ CXX = g++
 COMPILE_FLAGS = -w -g -std=c++0x -Wall
 
 # Required Libraries to Link
-LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU
+LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU -pthread
 
 #Program Name
 OUTPUT_NAME = SolarSimulator
@@ -17,7 +17,7 @@ OUTPUT_NAME = SolarSimulator
 INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
-	 $(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) -pthread
+	 $(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) 
 
 clean :
-	rm hello
+	rm $(OUTPUT_NAME)

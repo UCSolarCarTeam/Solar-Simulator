@@ -2,8 +2,9 @@
 #define OBJLOADER_H
 
 #include <vector>
-#include <glm/glm.hpp>
 
+#define GLM_FORCE_RADIANS
+#include <glm/glm.hpp>
 
 int loadObject(
 	const char * path, 

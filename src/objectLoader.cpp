@@ -1,9 +1,11 @@
-#include <vector>
+#include <cstring>
 #include <stdio.h>
 #include <string>
-#include <cstring>
+#include <vector>
 
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+
 #include "objectLoader.h"
 #include "mesh.h"
 

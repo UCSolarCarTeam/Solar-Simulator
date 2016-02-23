@@ -2,7 +2,10 @@
 #define SHADER_H
 
 #include <string>
+
+#define GLM_FORCE_RADIANS
 #include <GL/glew.h>
+
 #include "transform.h"
 
 class Shader
