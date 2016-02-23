@@ -25,6 +25,7 @@
 *.exe
 *.out
 *.app
+SolarSimulator
 
 # OS Files
 .DS_Store
