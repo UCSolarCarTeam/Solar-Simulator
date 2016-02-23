@@ -17,7 +17,7 @@ OUTPUT_NAME = SolarSimulator
 INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
-	 $(CPP) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) -pthread
+	 $(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) -pthread
 
 clean :
 	rm hello
