@@ -41,8 +41,7 @@ int loadObject(const char* path,
 	for(;;)
 	{
 		char lineHeader[128];
-		// read the first word of the line
-		int res = fscanf(file, "%s", lineHeader);
+		int res = fscanf(file, "%s", lineHeader);// read the first word of the line
 		whileLoops++;
 		if (res == EOF){
 			break; // EOF = End Of File. Quit the loop.
@@ -77,28 +76,23 @@ int loadObject(const char* path,
 			normalIndices.push_back(normalIndex[1]);
 			normalIndices.push_back(normalIndex[2]);
 		}
-		else
+		else // Probably a comment, eat up the rest of the line
 		{
-			// Probably a comment, eat up the rest of the line
 			char garbageBuffer[500];
 			fgets(garbageBuffer, 500, file);
 			commentLines++;
 		}
 	}
-
-	// For each vertex of each triangle
-	for( unsigned int i=0; i<vertexIndices.size(); i++ )
+	for( unsigned int i=0; i<vertexIndices.size(); i++ ) // For each vertex get indices of attributes
 	{
-		// Get the indices of its attributes
 		unsigned int vertexIndex = vertexIndices[i];
 		unsigned int normalIndex = normalIndices[i];
 		
-		// Get the attributes thanks to the index
-		glm::vec3 vertex = temp_vertices[ vertexIndex - 1 ];
-		glm::vec3 normal = temp_normals[ normalIndex - 1 ];
+		glm::vec3 vertex = temp_vertices[vertexIndex - 1]; // Get the attributes thanks to the index
+		glm::vec3 normal = temp_normals[normalIndex - 1];
 		
 		// Put the attributes in buffers
-		out_vertices.push_back(vertex);	
+		out_vertices.push_back(vertex);	// Put the attributes in buffers
 	}
 	std::cout << "The .obj file was loaded successfully!" << std::endl;
 	return vertexIndices.size();
