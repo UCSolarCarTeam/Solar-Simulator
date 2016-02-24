@@ -13,6 +13,7 @@ Shader::Shader(const std::string& fileName)
         glAttachShader(program_, shaders_[i]);
 
     glBindAttribLocation(program_, 0, "position");
+	glBindAttribLocation(program_, 1, "normal");
 
     glLinkProgram(program_);
     CheckShaderError(program_, GL_LINK_STATUS, true, "Error: Program linking failed:");
@@ -20,7 +21,8 @@ Shader::Shader(const std::string& fileName)
     glValidateProgram(program_);
     CheckShaderError(program_, GL_LINK_STATUS, true, "Error: Program is invalid");
 
-    uniforms_[TRANSFORM_U] = glGetUniformLocation(program_, "transform"); //gain access to transform uniform
+	uniforms_[0] = glGetUniformLocation(program_, "transform");//gain access to transform uniform
+	uniforms_[1] = glGetUniformLocation(program_, "lightVector");
 }
 
 Shader::~Shader()
@@ -86,7 +88,9 @@ void Shader::Bind()
 void Shader::Update(const Transform& transform)
 {
     glm::mat4 model = transform.getModel();
-    glUniformMatrix4fv(uniforms_[TRANSFORM_U], 1, GLU_FALSE, &model[0][0]);
+    glUniformMatrix4fv(uniforms_[0], 1, GLU_FALSE, &model[0][0]);
+	glUniform3f(uniforms_[1], 0.0f, 0.0f, 1.0f); //specify light direction here
+
 }
 
 void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)

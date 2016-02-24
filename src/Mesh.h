@@ -7,17 +7,17 @@
 class Mesh
 {
 public:
-    Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
+    Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, glm::vec3* normals);
     virtual ~Mesh();
     Mesh(const Mesh&) = delete;
     void operator=(const Mesh&) = delete;
-
     void Draw();
 
 private:
     enum
     {
         POSITION_VB,
+		NORMAL_VB,
         INDEX_VB,
         NUM_BUFFERS
     };

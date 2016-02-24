@@ -93,6 +93,7 @@ int loadObject(const char* path,
 
         // Put the attributes in buffers
         out_vertices.push_back(vertex); // Put the attributes in buffers
+		out_normals.push_back(normal);
     }
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return vertexIndices.size();
