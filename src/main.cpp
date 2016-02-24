@@ -56,7 +56,7 @@ int main(int argc, char **argv)
         counter += 0.0002f;
     }
 
-    delete indices;
+    delete[] indices;
     return 0;
 }
 
