@@ -1,23 +1,23 @@
-#OBJS = files to compile
+# Source Files
 OBJS = src/*.cpp 
 
+# Compiler
+CXX = g++
 
-#CC = compiler used
-CC = g++
+# Additional Flags
+COMPILE_FLAGS = -g -std=c++11 -Werror
 
-#COMPLIE_FLAGS = additional flags
-COMPILE_FLAGS = -w -g -std=c++0x -Wall
+# Required Libraries to Link
+LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU -pthread
 
-LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU
+#Program Name
+OUTPUT_NAME = SolarSimulator
 
-#OUTPUT_NAME = final name
-OUTPUT_NAME = hello
-
-#INCLUDE FLAGS
+# Headers to Include
 INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
-	 $(CC) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) -pthread
+	$(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) 
 
 clean :
-	rm hello
+	rm $(OUTPUT_NAME)
