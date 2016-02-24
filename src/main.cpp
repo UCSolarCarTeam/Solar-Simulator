@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     std::vector<glm::vec3> normals; // Won't be used at the moment.
     unsigned int numVertices = loadObject("samples/test2.obj", vertices, normals);
     glm::vec3* verticesArray = &vertices[0];
-    unsigned int indices[numVertices];
+    unsigned int* indices = new unsigned int [numVertices];
     for (unsigned int i = 0; i < numVertices; i++)
     {
         indices[i] = i;
@@ -56,6 +56,7 @@ int main(int argc, char **argv)
         counter += 0.0002f;
     }
 
+    delete indices;
     return 0;
 }
 
