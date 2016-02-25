@@ -18,4 +18,4 @@ else
 	exit 1
 fi
 
-./test/run-tests
+./test/RunTests

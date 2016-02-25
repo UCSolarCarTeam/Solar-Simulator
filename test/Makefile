@@ -4,7 +4,7 @@ COMPILE_FLAGS = -g -std=c++11 -Werror
 
 LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lGLEW -lGL -lGLU -pthread
 
-OUTPUT_NAME = run-tests
+OUTPUT_NAME = RunTests
 
 INCLUDE_FLAGS = -I../src -Ilib
 
