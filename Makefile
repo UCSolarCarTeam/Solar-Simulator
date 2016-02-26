@@ -1,5 +1,5 @@
 # Source Files
-OBJS = src/*.cpp 
+OBJS = src/*.cpp src/*.c
 
 # Compiler
 CXX = g++

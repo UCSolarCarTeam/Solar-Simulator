@@ -1,6 +1,6 @@
 #include "ModelData.h"
 #include <iostream>
-ModelData::ModelData(const std::vector<glm::vec3> &pos, const std::vector<glm::vec2> &textureCoord, const std::vector<glm::vec3> &normal)
+ModelData::ModelData(std::vector<glm::vec3>* pos, std::vector<glm::vec2>* textureCoord, std::vector<glm::vec3>* normal)
 {
 	this->position_ = pos;
 	this->texCoord_ = textureCoord;
@@ -12,32 +12,30 @@ ModelData::ModelData()
 
 }
 
-std::vector<glm::vec3>* ModelData::getPos()
+std::vector<glm::vec3>& ModelData::getPos()
 {
-
-	return &position_;
+	return *position_;
 }
 
-std::vector<glm::vec2>* ModelData::getTexCoord()
+std::vector<glm::vec2>& ModelData::getTexCoord()
 {
-	return &texCoord_;
+	return *texCoord_;
 }
 
-std::vector<glm::vec3>* ModelData::getNormal()
+std::vector<glm::vec3>& ModelData::getNormal()
 {
-	return &normal_;
+	return *normal_;
 }
 
-void ModelData::setPos(std::vector<glm::vec3> & pos)
+void ModelData::setPos(std::vector<glm::vec3>* pos)
 {
 	this->position_ = pos;
-
 }
-void ModelData::setTexCoord(std::vector<glm::vec2> & texCoord)
+void ModelData::setTexCoord(std::vector<glm::vec2>* texCoord)
 {
 	this->texCoord_ = texCoord;
 }
-void ModelData::setNormal(std::vector<glm::vec3> & normal)
+void ModelData::setNormal(std::vector<glm::vec3>* normal)
 {
 	this->normal_ = normal;
 }

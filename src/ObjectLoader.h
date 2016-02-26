@@ -6,6 +6,6 @@
 
 #include <glm/glm.hpp>
 
-bool loadObject(const char* path, ModelData data);
+bool loadObject(const char* path, ModelData& data);
 
 #endif

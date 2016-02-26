@@ -8,19 +8,19 @@
 class ModelData
 {
 public:
-	ModelData(const std::vector<glm::vec3> &pos, const std::vector<glm::vec2> &textureCoord, const std::vector<glm::vec3> &normal);
+	ModelData(std::vector<glm::vec3>* pos, std::vector<glm::vec2>* textureCoord, std::vector<glm::vec3>* normal);
 	ModelData();
-	std::vector<glm::vec3>* ModelData::getPos();
-	std::vector<glm::vec2>* ModelData::getTexCoord();
-	std::vector<glm::vec3>* ModelData::getNormal();
-	void ModelData::setPos(std::vector<glm::vec3> & pos);
-	void ModelData::setTexCoord(std::vector<glm::vec2> & texCoord);
-	void ModelData::setNormal(std::vector<glm::vec3> & normal);
+	std::vector<glm::vec3>& getPos();
+	std::vector<glm::vec2>& getTexCoord();
+	std::vector<glm::vec3>& getNormal();
+	void setPos(std::vector<glm::vec3>* pos);
+	void setTexCoord(std::vector<glm::vec2>* texCoord);
+	void setNormal(std::vector<glm::vec3>* normal);
 	
 private:
-	std::vector<glm::vec3> position_;
-	std::vector<glm::vec2> texCoord_;
-	std::vector<glm::vec3> normal_;
+	std::vector<glm::vec3>* position_;
+	std::vector<glm::vec2>* texCoord_;
+	std::vector<glm::vec3>* normal_;
 };
 
 #endif

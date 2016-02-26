@@ -18,7 +18,7 @@
  *  - Loading from memory, stream, etc
  */
 
-bool loadObject(const char* path, ModelData data)
+bool loadObject(const char* path, ModelData& data)
 {
     std::cout << "Loading OBJ file " << path << "..." << std::endl;
 
@@ -92,10 +92,11 @@ bool loadObject(const char* path, ModelData data)
 		out_normals.push_back(temp_normals[normalIndex - 1]);
 		out_texCoords.push_back(glm::vec2(0.5, 0.5)); //Set the texture coordinate to an arbitrary value
     }
-	data.setPos(out_vertices);// Put the attributes in buffers
-	data.setNormal(out_normals);
-	data.setTexCoord(out_texCoords);
-	std::cout << "Size within loadobject: " << data.getPos()->size() << std::endl;
+	data.setPos(&out_vertices);// Put the attributes in buffers
+	data.setNormal(&out_normals);
+	data.setTexCoord(&out_texCoords);
+	unsigned int numVertices = data.getPos().size();
+	std::cout << "Size inside of object loader: " << numVertices << std::endl;
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return true;
 }
