@@ -19,22 +19,19 @@ int main(int argc, char **argv)
     Display display (800, 600, "Solar Simulator");
 	ModelData objectData = ModelData();
 	loadObject("samples/test2.obj", objectData);
-	unsigned int numVertices = objectData.getPos().size();
-	const glm::vec3* verticesArray = &(objectData.getPos())[0];
-	const glm::vec3* normalsArray = &(objectData.getNormal())[0];
 
-    unsigned int* indices = new unsigned int [numVertices];
-    for (unsigned int i = 0; i < numVertices; i++)
+	std::vector<unsigned int>* indices = new std::vector<unsigned int>(); 
+    for (unsigned int i = 0; i < objectData.getSize(); i++)
     {
-        indices[i] = i;
+		indices->push_back(i);
     }
-
-    float scale = getGreatestValue(verticesArray, numVertices);
+	objectData.setIndices(indices);
+    float scale = getGreatestValue(&(objectData.getPos())[0], objectData.getSize());
 
     std::cout << "The greatest value is " << scale << std::endl;
-    std::cout << "Number of faces: " << (numVertices + 1) / 3 << std::endl;
+    std::cout << "Number of faces: " << (objectData.getSize() + 1) / 3 << std::endl;
     Shader shader("./shaders/basicShader");
-    Mesh mesh(verticesArray, numVertices, indices, (numVertices + 1) / 3, normalsArray);
+    Mesh mesh(objectData);
 	Texture texture("./textures/bricks.jpg");
 	Transform transform;
 

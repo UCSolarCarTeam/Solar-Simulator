@@ -1,11 +1,16 @@
 #include <iostream>
-
 #include "Mesh.h"
 
-Mesh::Mesh(const glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, const glm::vec3* normals)
-    : drawCount_(numVertices)
+Mesh::Mesh(ModelData& objectData)
+	: drawCount_(objectData.getSize())
 {
-    glGenVertexArrays(1, &vertexArrayObject_);
+	const glm::vec3* vertices = &(objectData.getPos())[0];
+	unsigned int numVertices = objectData.getSize();
+	const unsigned int* indices = &(objectData.getIndices())[0];
+	unsigned int numIndices = (numVertices + 1) / 3;
+	const glm::vec3* normals = &(objectData.getNormal())[0];
+
+	glGenVertexArrays(1, &vertexArrayObject_);
     glBindVertexArray(vertexArrayObject_);
     glGenBuffers(NUM_BUFFERS, vertexArrayBuffers_);
     glBindBuffer(GL_ARRAY_BUFFER, vertexArrayBuffers_[POSITION_VB]);

@@ -3,11 +3,12 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "ModelData.h"
 
 class Mesh
 {
 public:
-    Mesh(const glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, const glm::vec3* normals);
+	Mesh(ModelData& modelData);
     virtual ~Mesh();
     Mesh(const Mesh&) = delete;
     void operator=(const Mesh&) = delete;

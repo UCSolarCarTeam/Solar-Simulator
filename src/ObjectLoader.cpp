@@ -95,8 +95,7 @@ bool loadObject(const char* path, ModelData& data)
 	data.setPos(out_vertices);// Put the attributes in buffers
 	data.setNormal(out_normals);
 	data.setTexCoord(out_texCoords);
-	unsigned int numVertices = data.getPos().size();
-	std::cout << "Size inside of object loader: " << numVertices << std::endl;
+	data.setSize(data.getPos().size());
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return true;
 }
