@@ -19,6 +19,7 @@ int main(int argc, char **argv)
     Display display (800, 600, "Solar Simulator");
 	ModelData objectData = ModelData();
 	loadObject("samples/test2.obj", objectData);
+	std::cout << "Size outside of loadobject: " << objectData.getPos()->size() << std::endl;
 	unsigned int numVertices = objectData.getPos()->size();
 	std::cout << numVertices << std::endl;
 	std::vector <glm::vec3> * temp = objectData.getPos();

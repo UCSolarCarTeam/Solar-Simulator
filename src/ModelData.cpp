@@ -14,7 +14,7 @@ ModelData::ModelData()
 
 std::vector<glm::vec3>* ModelData::getPos()
 {
-		std::cout << "set pos " << position_.size() << std::endl;
+
 	return &position_;
 }
 
