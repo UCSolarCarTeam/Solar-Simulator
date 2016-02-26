@@ -17,4 +17,4 @@ Example:
 
 ## Note 
 
-glm libraries have to be copied into /usr/local/include/
+Both glm and glew libraries have to be installed in /usr/local/include/
