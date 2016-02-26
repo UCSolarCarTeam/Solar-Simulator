@@ -9,18 +9,23 @@
 #include "ObjectLoader.h"
 #include "Shader.h"
 #include "Transform.h"
+#include "texture.h"
+#include "ModelData.h"
 
 float getGreatestValue(glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
     Display display (800, 600, "Solar Simulator");
+	ModelData objectData = ModelData();
+	loadObject("samples/test2.obj", objectData);
+	unsigned int numVertices = objectData.getPos()->size();
+	std::cout << numVertices << std::endl;
+	std::vector <glm::vec3> * temp = objectData.getPos();
+	glm::vec3* verticesArray = &(*temp)[0];
+	glm::vec3* normalsArray = &(*objectData.getNormal())[0];
+	glm::vec2* texArray = &(*objectData.getTexCoord())[0];
 
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec3> normals; // Won't be used at the moment.
-    unsigned int numVertices = loadObject("samples/test2.obj", vertices, normals);
-    glm::vec3* verticesArray = &vertices[0];
-	glm::vec3* normalsArray = &normals[0];
     unsigned int* indices = new unsigned int [numVertices];
     for (unsigned int i = 0; i < numVertices; i++)
     {
@@ -33,7 +38,8 @@ int main(int argc, char **argv)
     std::cout << "Number of faces: " << (numVertices + 1) / 3 << std::endl;
     Shader shader("./shaders/basicShader");
     Mesh mesh(verticesArray, numVertices, indices, (numVertices + 1) / 3, normalsArray);
-    Transform transform;
+	Texture texture("./textures/bricks.jpg");
+	Transform transform;
 
     float counter = 0.0f;
 
@@ -43,7 +49,7 @@ int main(int argc, char **argv)
 
     while (!display.IsClosed())
     {
-        display.Clear(0.0f, 0.15f, 0.3f, 1.0f);
+        display.Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
         transform.getRot()->y = counter; //rotate about the y-axis
         //transform.getRot()->z = counter;
@@ -51,6 +57,7 @@ int main(int argc, char **argv)
 
         shader.Bind();
         shader.Update(transform);
+		texture.Bind(0);
         mesh.Draw();
 
         display.Update();

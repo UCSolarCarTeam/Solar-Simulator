@@ -11,7 +11,6 @@
 /**
  * Here is a short list of features a real function would provide :
  *  - Binary files. Reading a model should be just a few memcpy's away, not parsing a file at runtime. In short : OBJ is not very great.
- *  - Animations & bones (includes bones weights)
  *  - Multiple UVs
  *  - All attributes should be optional, not "forced"
  *  - More stable. Change a line in the OBJ file and it crashes.
@@ -19,9 +18,7 @@
  *  - Loading from memory, stream, etc
  */
 
-int loadObject(const char* path,
-               std::vector<glm::vec3>& out_vertices,
-               std::vector<glm::vec3>& out_normals)
+bool loadObject(const char* path, ModelData data)
 {
     std::cout << "Loading OBJ file " << path << "..." << std::endl;
 
@@ -34,7 +31,7 @@ int loadObject(const char* path,
     {
         std::cout << "Error! Unable to open file. Please check that the correct directory has been specified." << std::endl;
         getchar();
-        return -1;
+        return false;
     }
     int whileLoops = 0;
     int commentLines = 0;
@@ -67,7 +64,7 @@ int loadObject(const char* path,
                 std::cout << "The file could not be read by our parser! Try exporting with other options." << std::endl;
                 std::cout << "The loop ran: " << whileLoops << " times" << std::endl;
                 std::cout << "Commented lines: " << commentLines << std::endl;
-                return -1;
+                return false;
             }
             vertexIndices.push_back(vertexIndex[0]);
             vertexIndices.push_back(vertexIndex[1]);
@@ -83,18 +80,21 @@ int loadObject(const char* path,
             commentLines++;
         }
     }
+	std::vector <glm::vec3> out_vertices;
+	std::vector <glm::vec2> out_texCoords;
+	std::vector <glm::vec3> out_normals;
     for ( unsigned int i = 0; i < vertexIndices.size(); i++ ) // For each vertex get indices of attributes
     {
         unsigned int vertexIndex = vertexIndices[i];
         unsigned int normalIndex = normalIndices[i];
 
-        glm::vec3 vertex = temp_vertices[vertexIndex - 1]; // Get the attributes thanks to the index
-        glm::vec3 normal = temp_normals[normalIndex - 1];
-
-        // Put the attributes in buffers
-        out_vertices.push_back(vertex); // Put the attributes in buffers
-		out_normals.push_back(normal);
+        out_vertices.push_back(temp_vertices[vertexIndex - 1]); // Get the attributes thanks to the index
+		out_normals.push_back(temp_normals[normalIndex - 1]);
+		out_texCoords.push_back(glm::vec2(0.5, 0.5)); //Set the texture coordinate to an arbitrary value
     }
+	data.setPos(out_vertices);// Put the attributes in buffers
+	data.setNormal(out_normals);
+	data.setTexCoord(out_texCoords);
     std::cout << "The .obj file was loaded successfully!" << std::endl;
-    return vertexIndices.size();
+    return true;
 }
