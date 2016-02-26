@@ -2,7 +2,7 @@
 
 #include "Mesh.h"
 
-Mesh::Mesh(glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, glm::vec3* normals)
+Mesh::Mesh(const glm::vec3* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, const glm::vec3* normals)
     : drawCount_(numVertices)
 {
     glGenVertexArrays(1, &vertexArrayObject_);

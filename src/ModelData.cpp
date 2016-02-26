@@ -12,17 +12,17 @@ ModelData::ModelData()
 
 }
 
-std::vector<glm::vec3>& ModelData::getPos()
+const std::vector<glm::vec3>& ModelData::getPos()
 {
 	return *position_;
 }
 
-std::vector<glm::vec2>& ModelData::getTexCoord()
+const std::vector<glm::vec2>& ModelData::getTexCoord()
 {
 	return *texCoord_;
 }
 
-std::vector<glm::vec3>& ModelData::getNormal()
+const std::vector<glm::vec3>& ModelData::getNormal()
 {
 	return *normal_;
 }

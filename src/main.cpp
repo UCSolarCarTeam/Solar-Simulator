@@ -12,7 +12,7 @@
 #include "texture.h"
 #include "ModelData.h"
 
-float getGreatestValue(glm::vec3* verticesArray, unsigned int size);
+float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
@@ -20,10 +20,8 @@ int main(int argc, char **argv)
 	ModelData objectData = ModelData();
 	loadObject("samples/test2.obj", objectData);
 	unsigned int numVertices = objectData.getPos().size();
-	std::cout << "Size outside of objectloader: "<< numVertices << std::endl;
-	glm::vec3* verticesArray = &(objectData.getPos())[0];
-	glm::vec3* normalsArray = &(objectData.getNormal())[0];
-
+	const glm::vec3* verticesArray = &(objectData.getPos())[0];
+	const glm::vec3* normalsArray = &(objectData.getNormal())[0];
 
     unsigned int* indices = new unsigned int [numVertices];
     for (unsigned int i = 0; i < numVertices; i++)
@@ -67,7 +65,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-float getGreatestValue(glm::vec3* verticesArray, unsigned int size)
+float getGreatestValue(const glm::vec3* verticesArray, unsigned int size)
 {
     float greatestValue = 0;
     for (unsigned int i = 0; i < size; i++)
