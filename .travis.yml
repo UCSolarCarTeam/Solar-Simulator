@@ -1,0 +1,24 @@
+before_install:
+    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    - sudo apt-get update -qq
+
+install:
+    - sudo apt-get install -qq g++-4.8
+    - export CXX="g++-4.8"
+    - sudo bash ./installer.sh
+    - git clone https://github.com/google/googletest.git
+    - cd googletest
+    - sudo cp -r googletest/include/gtest /usr/local/include
+    - sudo cp -r googlemock/include/gmock /usr/local/include
+    - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googlemock/src/gmock-all.cc
+    - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googletest/src/gtest-all.cc
+    - ar -rv libgmock.a gtest-all.o gmock-all.o
+    - cp libgmock.a ../test/
+    - cd ..
+
+before-install:
+    - chmod +x make-all.sh
+
+script: sudo bash ./make-all.sh
+
+language: cpp
