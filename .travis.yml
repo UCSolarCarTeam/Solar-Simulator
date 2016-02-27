@@ -2,8 +2,8 @@ install:
     - sudo ./installer.sh
     - git clone https://github.com/google/googletest.git
     - cd googletest
-    - cp -r googletest/googletest/include/gtest /usr/local/include
-    - cp -r googletest/googlemock/include/gmock /usr/local/include
+    - cp -r googletest/include/gtest /usr/local/include
+    - cp -r googlemock/include/gmock /usr/local/include
     - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googlemock/src/gmock-all.cc
     - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googletest/src/gtest-all.cc
     - ar -rv libgmock.a gtest-all.o gmock-all.o
