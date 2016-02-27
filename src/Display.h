@@ -16,11 +16,14 @@ public:
     void Update();
     bool IsClosed();
     void Clear(float red, float green, float blue, float alpha);
-
+	unsigned int getWidth();
+	unsigned int getHeight();
 private:
     SDL_Window* window_;
     bool isClosed_;
     SDL_GLContext glContext_;
+	unsigned int width_;
+	unsigned int height_;
 };
 
 #endif
