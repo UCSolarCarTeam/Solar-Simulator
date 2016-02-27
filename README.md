@@ -22,7 +22,7 @@ glm libraries have to be copied into `/usr/local/include/`
 
 ## Set up tests
 
-Testing for Solar Simulator is done with googletest and googlemock, the header files are included in this project.
+Testing the CCS Test Tool is done with googletest and googlemock, the gmock and gtest header files need to be in /usr/local/include.
 You must compile the library that has the definitions yourself. 
 Meaning you need a `libgmock.a` archive file in the test directory in order to compile the tests. 
 
