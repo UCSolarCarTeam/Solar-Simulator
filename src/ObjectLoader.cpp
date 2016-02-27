@@ -90,7 +90,7 @@ bool loadObject(const char* path, ModelData& data)
 
         out_vertices->push_back(temp_vertices[vertexIndex - 1]); // Get the attributes thanks to the index
 		out_normals->push_back(temp_normals[normalIndex - 1]);
-		out_texCoords->push_back(glm::vec2(0.15, 0.15)); //Set the texture coordinate to an arbitrary value
+		out_texCoords->push_back(glm::vec2(0.2, 0.2)); //Set the texture coordinate to an arbitrary value
     }
 	data.setPos(out_vertices);// Put the attributes in buffers
 	data.setNormal(out_normals);

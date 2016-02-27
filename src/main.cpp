@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 {
     Display display (800, 600, "Solar Simulator");
 	ModelData objectData = ModelData();
-	loadObject("samples/test2.obj", objectData);
+	loadObject("samples/test.obj", objectData);
 
 	std::vector<unsigned int>* indices = new std::vector<unsigned int>(); 
     for (unsigned int i = 0; i < objectData.getSize(); i++)
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         display.Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
         transform.getRot()->y = counter; //rotate about the y-axis
-        //transform.getRot()->z = counter;
+        transform.getRot()->z = counter;
        // transform.getRot()->x = counter;
 
         shader.Bind();
