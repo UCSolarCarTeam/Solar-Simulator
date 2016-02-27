@@ -1,5 +1,5 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>

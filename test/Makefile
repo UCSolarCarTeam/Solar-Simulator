@@ -9,7 +9,7 @@ OUTPUT_NAME = RunTests
 INCLUDE_FLAGS = -I../src -Ilib
 
 all :
-	 $(CXX) -isystem gtest_include -isystem gmock_include $(INCLUDE_FLAGS) $(OBJS) $(LINK_FLAGS) $(COMPILE_FLAGS) libgmock.a -o $(OUTPUT_NAME)
+	 $(CXX) $(INCLUDE_FLAGS) $(OBJS) $(LINK_FLAGS) $(COMPILE_FLAGS) libgmock.a -o $(OUTPUT_NAME)
 
 clean :
 	rm run-tests
