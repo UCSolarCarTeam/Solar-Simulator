@@ -13,10 +13,6 @@ const int SCREEN_HEIGHT = 800;
 const int BUTTON_WIDTH = 100;
 const int BUTTON_HEIGHT = 50;
 
-enum ButtonSprite {
-
-}
-
 // Function declarations
 bool init();
 void close();
@@ -89,12 +85,12 @@ void createTexture() {
 
 void close() {
 	//Destroy texture, renderer, window
-	SDL_DestroyTexture(gTexture);
-    SDL_DestroyTexture(gTextTexture);
-    SDL_DestroyRenderer(gRenderer);
-	SDL_DestroyWindow(gWindow);
     SDL_FreeSurface(gSurface);
     TTF_CloseFont(gFont);
+    SDL_DestroyTexture(gTextTexture);
+	SDL_DestroyTexture(gTexture);
+    SDL_DestroyRenderer(gRenderer);
+	SDL_DestroyWindow(gWindow);
 	gTexture = NULL;
     gFont = NULL;
     gTextTexture = NULL;
@@ -136,14 +132,25 @@ void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
                 inside = false;
             } else if (x > buttonX + BUTTON_WIDTH) {
                 inside = false;
-            } else if (y < buttonY) {
-                 inside = false
-            } else if (y < buttonY + BUTTON_HEIGHT) {
+            } else if (y < (buttonY + SCREEN_HEIGHT / 1.2)) {
+                 inside = false;
+            } else if (y > (buttonY + SCREEN_HEIGHT / 1.2) + BUTTON_HEIGHT) {
                 inside = false;
             }
 
-            if (!inside) {
+            if (inside) {
+                switch(e->type) {
+                    case SDL_MOUSEMOTION:
+                    break;
 
+                    case SDL_MOUSEBUTTONDOWN:
+                    printf("I am being pressed.\n");
+                    break;
+
+                    case SDL_MOUSEBUTTONUP:
+                    printf("I am being released.\n");
+                    break;
+                }
             }
 
         }
@@ -166,9 +173,8 @@ int main( int argc, char* args[] ) {
         SDL_Rect browseButton = createButton(browseButtonX, browseButtonY);
         gFont = TTF_OpenFont("SDLLearningForHenry/lazy.ttf", 12);
         if (gFont == NULL) {
+            printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
         }
-        printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
-
         // Create texture
         createTexture();
 
@@ -183,10 +189,10 @@ int main( int argc, char* args[] ) {
 				if(e.type == SDL_QUIT) {
 					quit = true;
 				}
-
+                handleEvent(&e, browseButtonX, browseButtonY);
 			}
 
-            SDL_SetRenderDrawColor(gRenderer, 250, 250, 210, 25 5);
+            SDL_SetRenderDrawColor(gRenderer, 250, 250, 210, 255);
             SDL_RenderClear(gRenderer);
 
             SDL_Color textColor = {0, 0, 0};
