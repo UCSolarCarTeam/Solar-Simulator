@@ -26,6 +26,7 @@
 *.out
 *.app
 SolarSimulator
+RunTests
 
 # OS Files
 .DS_Store
