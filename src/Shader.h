@@ -4,8 +4,8 @@
 #include <string>
 
 #include <GL/glew.h>
+
 #include "Transform.h"
-#include "Camera.h"
 
 class Shader
 {
@@ -16,7 +16,7 @@ public:
     void operator=(const Shader&) = delete;
 
     void Bind();
-    void Update(const Transform& transform, const Camera& camera);
+    void Update(const Transform& transform);
 
 private:
     static const unsigned int NUM_SHADERS = 2;

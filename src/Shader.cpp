@@ -86,9 +86,9 @@ void Shader::Bind()
     glUseProgram(program_);
 }
 
-void Shader::Update(const Transform& transform, const Camera& camera)
+void Shader::Update(const Transform& transform)
 {
-    glm::mat4 model = camera.getViewProjection() * transform.getModel();
+    glm::mat4 model = transform.getModel();
     glUniformMatrix4fv(uniforms_[0], 1, GLU_FALSE, &model[0][0]);
 	glUniform3f(uniforms_[1], 0.0f, 0.0f, 1.0f); //specify light direction here
 

@@ -7,8 +7,7 @@
 Display::Display(int width, int height, const std::string& title)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-	width_ = width;
-	height_ = height;
+
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8); //256 different shades of red
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
@@ -18,7 +17,7 @@ Display::Display(int width, int height, const std::string& title)
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); //Space for second window to be drawn on
 
-    window_ = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_OPENGL); //SDL takes in a C string
+    window_ = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL); //SDL takes in a C string
     glContext_ = SDL_GL_CreateContext(window_);
 
     GLenum status = glewInit();
@@ -65,14 +64,4 @@ void Display::Clear(float red, float green, float blue, float alpha)
     glClearColor(red, green, blue, alpha);
 	//glClear(GL_COLOR_BUFFER_BIT); 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-unsigned int Display::getWidth()
-{
-	return width_;
-}
-
-unsigned int Display::getHeight()
-{
-	return height_;
 }
