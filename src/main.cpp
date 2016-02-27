@@ -9,7 +9,7 @@
 #include "ObjectLoader.h"
 #include "Shader.h"
 #include "Transform.h"
-#include "texture.h"
+#include "Texture.h"
 #include "ModelData.h"
 
 float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
