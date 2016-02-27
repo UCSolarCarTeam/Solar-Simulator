@@ -27,6 +27,7 @@ function finish {
 trap finish EXIT
 
 sudo apt-get install libglm-dev
+sudo apt-get install libglew-dev
 
 #SDL2.0
 wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
