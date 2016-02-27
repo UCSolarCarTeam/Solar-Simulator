@@ -6,7 +6,6 @@
 #include <cmath>
 
 
-
 // Screen dimension constants
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 800;
@@ -35,6 +34,7 @@ SDL_Texture* gTextTexture = NULL;
 bool init() {
 	//Initialization flag
 	bool success = true;
+    SDL_LogSetAllPriority(SDL_LOG_PRIORITY_WARN);
 
 	//Initialize SDL
 	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -104,11 +104,18 @@ void close() {
 }
 
 void loadFromRenderedText(std::string buttonText, SDL_Color textColor) {
+    if (gTextTexture != NULL) {
+        SDL_DestroyTexture(gTextTexture);
+        gTextTexture = NULL;
+    }
     SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, buttonText.c_str(), textColor);
     if (textSurface == NULL) {
         printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
     } else {
         gTextTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
+        if (gTextTexture == NULL) {
+            printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+        }
     }
     SDL_FreeSurface(textSurface);
 }
@@ -181,6 +188,14 @@ int main( int argc, char* args[] ) {
 		//Event handler
 		SDL_Event e;
 
+        SDL_Color textColor = {0, 0, 0};
+
+        SDL_Rect bottomViewport;
+        bottomViewport.x = 0;
+        bottomViewport.y = SCREEN_HEIGHT / 1.2;
+        bottomViewport.w = SCREEN_WIDTH;
+        bottomViewport.h = SCREEN_HEIGHT / 4;
+
 		//While application is running
 		while(!quit) {
 			//Handle events on queue
@@ -194,14 +209,6 @@ int main( int argc, char* args[] ) {
 
             SDL_SetRenderDrawColor(gRenderer, 250, 250, 210, 255);
             SDL_RenderClear(gRenderer);
-
-            SDL_Color textColor = {0, 0, 0};
-
-            SDL_Rect bottomViewport;
-            bottomViewport.x = 0;
-            bottomViewport.y = SCREEN_HEIGHT / 1.2;
-            bottomViewport.w = SCREEN_WIDTH;
-            bottomViewport.h = SCREEN_HEIGHT / 4;
 
             SDL_RenderSetViewport(gRenderer, &bottomViewport);
             SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
