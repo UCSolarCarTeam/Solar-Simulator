@@ -1,5 +1,5 @@
 install:
-    - sudo ./installer.sh
+    - sudo bash ./installer.sh
     - git clone https://github.com/google/googletest.git
     - cd googletest
     - sudo cp -r googletest/include/gtest /usr/local/include
