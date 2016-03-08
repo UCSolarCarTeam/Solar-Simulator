@@ -29,7 +29,6 @@ private:
     GLuint program_;
     GLuint shaders_[NUM_SHADERS];
     GLuint uniforms_[NUM_UNIFORMS];
-
 };
 
 #endif
