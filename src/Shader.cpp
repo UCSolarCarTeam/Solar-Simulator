@@ -24,8 +24,8 @@ Shader::Shader(const std::string& fileName)
     glValidateProgram(program_);
     CheckShaderError(program_, GL_LINK_STATUS, true, "Error: Program is invalid");
 
-    uniforms_[0] = glGetUniformLocation(program_, "transform");//gain access to transform uniform
-    uniforms_[1] = glGetUniformLocation(program_, "lightVector");
+    uniforms_[TRANSFORM_U] = glGetUniformLocation(program_, "transform");//gain access to transform uniform
+    uniforms_[LIGHTVECTOR_U] = glGetUniformLocation(program_, "lightVector");
 }
 
 Shader::~Shader()
