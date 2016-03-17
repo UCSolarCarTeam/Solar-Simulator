@@ -1,5 +1,6 @@
 #include "Texture.h"
 #include <iostream>
+#include "stb_image.h"
 
 
 Texture::Texture(const std::string& fileName)

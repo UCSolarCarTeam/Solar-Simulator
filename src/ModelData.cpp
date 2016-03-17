@@ -1,11 +1,8 @@
 #include "ModelData.h"
 #include <iostream>
 ModelData::ModelData(std::vector<glm::vec3>* pos, std::vector<glm::vec2>* textureCoord, std::vector<glm::vec3>* normal)
+	:position_(pos), texCoord_(textureCoord), normal_(normal), numVertices_(pos->size())
 {
-	this->position_ = pos;
-	this->texCoord_ = textureCoord;
-	this->normal_ = normal;
-	this->numVertices_ = pos->size();
 }
 
 ModelData::ModelData()
