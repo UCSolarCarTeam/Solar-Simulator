@@ -10,11 +10,11 @@ class ModelData
 public:
 	ModelData(std::vector<glm::vec3>* pos, std::vector<glm::vec2>* textureCoord, std::vector<glm::vec3>* normal);
 	ModelData();
-	const std::vector<glm::vec3>& getPos();
-	const std::vector<glm::vec2>& getTexCoord();
-	const std::vector<glm::vec3>& getNormal();
-	const std::vector<unsigned int>& getIndices();
-	unsigned int getSize();
+	const std::vector<glm::vec3>& getPos() const;
+	const std::vector<glm::vec2>& getTexCoord() const;
+	const std::vector<glm::vec3>& getNormal() const;
+	const std::vector<unsigned int>& getIndices() const;
+	unsigned int getSize() const;
 	void setSize(unsigned int size);
 	void setPos(std::vector<glm::vec3>* pos);
 	void setTexCoord(std::vector<glm::vec2>* texCoord);

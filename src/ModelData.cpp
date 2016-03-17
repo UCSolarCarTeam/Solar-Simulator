@@ -13,25 +13,25 @@ ModelData::ModelData()
 
 }
 
-const std::vector<glm::vec3>& ModelData::getPos()
+const std::vector<glm::vec3>& ModelData::getPos() const
 {
 	return *position_;
 }
 
-const std::vector<glm::vec2>& ModelData::getTexCoord()
+const std::vector<glm::vec2>& ModelData::getTexCoord() const
 {
 	return *texCoord_;
 }
 
-const std::vector<glm::vec3>& ModelData::getNormal()
+const std::vector<glm::vec3>& ModelData::getNormal() const
 {
 	return *normal_;
 }
-const std::vector<unsigned int>& ModelData::getIndices()
+const std::vector<unsigned int>& ModelData::getIndices() const
 {
 	return *indices_;
 }
-unsigned int ModelData::getSize()
+unsigned int ModelData::getSize() const
 {
 	return numVertices_;
 }
