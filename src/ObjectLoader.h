@@ -2,7 +2,7 @@
 #define OBJLOADER_H
 
 #include <vector>
-#include "ModelData.h"
+class ModelData;
 
 #include <glm/glm.hpp>
 
