@@ -1,4 +1,4 @@
-OBJS = $(wildcard src/*.cpp) $(filter-out ../src/main.cpp, $(wildcard ../src/*.cpp))
+OBJS = $(wildcard src/*.cpp) $(filter-out ../src/main.cpp, $(wildcard ../src/*.cpp)) $(wildcard ../src/*.c)
 
 COMPILE_FLAGS = -g -std=c++11 -Werror
 

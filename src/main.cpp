@@ -9,29 +9,30 @@
 #include "ObjectLoader.h"
 #include "Shader.h"
 #include "Transform.h"
+#include "Texture.h"
+#include "ModelData.h"
 
-float getGreatestValue(glm::vec3* verticesArray, unsigned int size);
+float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
     Display display (800, 600, "Solar Simulator");
+    ModelData objectData = ModelData();
+    loadObject("samples/test.obj", objectData);
 
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec3> normals; // Won't be used at the moment.
-    unsigned int numVertices = loadObject("samples/test2.obj", vertices, normals);
-    glm::vec3* verticesArray = &vertices[0];
-    unsigned int* indices = new unsigned int [numVertices];
-    for (unsigned int i = 0; i < numVertices; i++)
+    std::vector<unsigned int>* indices = new std::vector<unsigned int>();
+    for (unsigned int i = 0; i < objectData.getSize(); i++)
     {
-        indices[i] = i;
+        indices->push_back(i);
     }
-
-    float scale = getGreatestValue(verticesArray, numVertices);
+    objectData.setIndices(indices);
+    float scale = getGreatestValue(&(objectData.getPos())[0], objectData.getSize());
 
     std::cout << "The greatest value is " << scale << std::endl;
-    std::cout << "Number of faces: " << (numVertices + 1) / 3 << std::endl;
+    std::cout << "Number of faces: " << (objectData.getSize() + 1) / 3 << std::endl;
     Shader shader("./shaders/basicShader");
-    Mesh mesh(verticesArray, numVertices, indices, (numVertices + 1) / 3);
+    Mesh mesh(objectData);
+    Texture texture("./textures/bricks.jpg");
     Transform transform;
 
     float counter = 0.0f;
@@ -42,14 +43,14 @@ int main(int argc, char **argv)
 
     while (!display.IsClosed())
     {
-        display.Clear(0.0f, 0.15f, 0.3f, 1.0f);
+        display.Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
         transform.getRot()->y = counter; //rotate about the y-axis
         transform.getRot()->z = counter;
-        transform.getRot()->x = counter;
 
         shader.Bind();
         shader.Update(transform);
+        texture.Bind(0);
         mesh.Draw();
 
         display.Update();
@@ -60,7 +61,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-float getGreatestValue(glm::vec3* verticesArray, unsigned int size)
+float getGreatestValue(const glm::vec3* verticesArray, unsigned int size)
 {
     float greatestValue = 0;
     for (unsigned int i = 0; i < size; i++)

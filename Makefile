@@ -1,5 +1,5 @@
 # Source Files
-OBJS = src/*.cpp 
+OBJS = src/*.cpp src/*.c
 
 # Additional Flags
 COMPILE_FLAGS = -g -std=c++11 -Werror
