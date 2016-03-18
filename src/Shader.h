@@ -25,16 +25,16 @@ private:
     void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
     GLuint CreateShader(const std::string& text, unsigned int type);
 
-	enum
-	{
-		TRANSFORM_U,
-		LIGHTVECTOR_U,
-		NUM_UNIFORMS
-	};
+    enum
+    {
+        TRANSFORM_U,
+        LIGHTVECTOR_U,
+        NUM_UNIFORMS
+    };
 
-	GLuint program_;
-	GLuint shaders_[NUM_SHADERS];
-	GLuint uniforms_[NUM_UNIFORMS];
+    GLuint program_;
+    GLuint shaders_[NUM_SHADERS];
+    GLuint uniforms_[NUM_UNIFORMS];
 };
 
 #endif

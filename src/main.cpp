@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     ModelData objectData = ModelData();
     loadObject("samples/test.obj", objectData);
 
-    std::vector<unsigned int>* indices = new std::vector<unsigned int>(); 
+    std::vector<unsigned int>* indices = new std::vector<unsigned int>();
     for (unsigned int i = 0; i < objectData.getSize(); i++)
     {
         indices->push_back(i);

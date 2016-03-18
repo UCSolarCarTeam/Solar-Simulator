@@ -23,7 +23,7 @@ Mesh::Mesh(ModelData& objectData)
     glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(texCoord[0]), texCoord, GL_STATIC_DRAW); //SINCE STATIC DATA IS BEING USED
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, vertexArrayBuffers_[NORMAL_VB]);
     glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(normals[0]), normals, GL_STATIC_DRAW); //SINCE STATIC DATA IS BEING USED
     glEnableVertexAttribArray(2);
