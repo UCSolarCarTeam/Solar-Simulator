@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
 #include <SDL_ttf.h>
 #include <cmath>
 #include <QApplication>
@@ -132,8 +133,7 @@ SDL_Rect createButton(int x, int y) {
 
 void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
     QString fileName;
-    QString filters("Music files (*.mp3);;Text files (*.txt);;All files (*.*)");
-    QString defaultFilter("Text files (*.txt)");
+    QString filters("All files (*.*)");
 
     if (e-> type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
         // Get mouse position
@@ -167,7 +167,8 @@ void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
                 printf("I am being released.\n");
                 /* Static method approach */
                 fileName = QFileDialog::getOpenFileName(0, "Open file", QDir::currentPath(),
-                filters, &defaultFilter);
+                filters, NULL, QFileDialog::DontUseNativeDialog);
+                std::cout << "The file path is " + fileName.toStdString() <<  std::endl;
                 break;
             }
         }
