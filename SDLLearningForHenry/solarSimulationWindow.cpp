@@ -4,7 +4,10 @@
 #include <string>
 #include <SDL_ttf.h>
 #include <cmath>
+#include <QApplication>
+#include <QFileDialog>
 
+using namespace std;
 
 // Screen dimension constants
 const int SCREEN_WIDTH = 800;
@@ -98,6 +101,8 @@ void close() {
 	gWindow = NULL;
     gSurface = NULL;
 
+    delete qApp;
+
 	//Quit SDL subsystems
     TTF_Quit();
 	SDL_Quit();
@@ -126,43 +131,48 @@ SDL_Rect createButton(int x, int y) {
 }
 
 void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
+    QString fileName;
+    QString filters("Music files (*.mp3);;Text files (*.txt);;All files (*.*)");
+    QString defaultFilter("Text files (*.txt)");
+
     if (e-> type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
-            // Get mouse position
-            int x, y;
-            SDL_GetMouseState(&x, &y);
+        // Get mouse position
+        int x, y;
+        SDL_GetMouseState(&x, &y);
 
-            // Check if mouse is in button
-            bool inside = true;
+        // Check if mouse is in button
+        bool inside = true;
 
-            // Checks if mouse is out of button
-            if (x < buttonX){
-                inside = false;
-            } else if (x > buttonX + BUTTON_WIDTH) {
-                inside = false;
-            } else if (y < (buttonY + SCREEN_HEIGHT / 1.2)) {
-                 inside = false;
-            } else if (y > (buttonY + SCREEN_HEIGHT / 1.2) + BUTTON_HEIGHT) {
-                inside = false;
-            }
-
-            if (inside) {
-                switch(e->type) {
-                    case SDL_MOUSEMOTION:
-                    break;
-
-                    case SDL_MOUSEBUTTONDOWN:
-                    printf("I am being pressed.\n");
-                    break;
-
-                    case SDL_MOUSEBUTTONUP:
-                    printf("I am being released.\n");
-                    break;
-                }
-            }
-
+        // Checks if mouse is out of button
+        if (x < buttonX){
+            inside = false;
+        } else if (x > buttonX + BUTTON_WIDTH) {
+            inside = false;
+        } else if (y < (buttonY + SCREEN_HEIGHT / 1.2)) {
+             inside = false;
+        } else if (y > (buttonY + SCREEN_HEIGHT / 1.2) + BUTTON_HEIGHT) {
+            inside = false;
         }
-}
 
+        if (inside) {
+            switch(e->type) {
+                case SDL_MOUSEMOTION:
+                break;
+
+                case SDL_MOUSEBUTTONDOWN:
+                printf("I am being pressed.\n");
+                break;
+
+                case SDL_MOUSEBUTTONUP:
+                printf("I am being released.\n");
+                /* Static method approach */
+                fileName = QFileDialog::getOpenFileName(0, "Open file", QDir::currentPath(),
+                filters, &defaultFilter);
+                break;
+            }
+        }
+    }
+}
 
 /******************************************************************************/
 
@@ -175,6 +185,7 @@ int main( int argc, char* args[] ) {
 		bool quit = false;
 
         // Initialize variables (will migrate to classes later :P)
+        QApplication app(argc, args);
         int browseButtonX = 50;
         int browseButtonY = 50;
         SDL_Rect browseButton = createButton(browseButtonX, browseButtonY);
