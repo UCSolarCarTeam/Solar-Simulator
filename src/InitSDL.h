@@ -6,7 +6,6 @@
 #include "ModelData.h"
 #include <string>
 
-
 class InitSDL
 {
 public:
