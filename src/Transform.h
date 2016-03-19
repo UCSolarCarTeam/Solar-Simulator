@@ -38,7 +38,7 @@ public:
 
     inline void setPos(glm::vec3& position) { position_ = position; }
     inline void setRot(glm::vec3& rotation) { rotation_ = rotation; }
-    inline void setScale(glm::vec3& scale) { scale_ = scale; }
+    inline void setScale(float scale) { scale_ = glm::vec3(scale, scale, scale);}
 
 private:
     glm::vec3 position_;

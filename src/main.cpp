@@ -34,9 +34,7 @@ int main(int argc, char **argv)
 
     float counter = 0.0f;
 
-    transform.getScale()->x = 1 / (scale);
-    transform.getScale()->y = 1 / (scale);
-    transform.getScale()->z = 1 / (scale);
+    transform.setScale(1 / scale);
 
     while (!window.IsClosed())
     {
