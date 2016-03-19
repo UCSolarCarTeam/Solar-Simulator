@@ -2,10 +2,23 @@
 #define OBJLOADER_H
 
 #include <vector>
-class ModelData;
+#include "ModelData.h"
 
 #include <glm/glm.hpp>
 
-bool loadObject(const char* path, ModelData& data);
+
+class ObjectLoader
+{
+public:
+	ObjectLoader();
+	const ModelData* getModel();
+	bool loadObject(const char* path);
+	ObjectLoader(const ObjectLoader&) = delete;
+    void operator=(const ObjectLoader&) = delete;
+    virtual ~ObjectLoader();
+
+private:
+	ModelData * data_;
+};
 
 #endif

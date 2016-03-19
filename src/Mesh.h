@@ -8,7 +8,7 @@
 class Mesh
 {
 public:
-    Mesh(ModelData& modelData);
+    Mesh(const ModelData& modelData);
     virtual ~Mesh();
     Mesh(const Mesh&) = delete;
     void operator=(const Mesh&) = delete;

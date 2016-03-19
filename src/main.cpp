@@ -1,37 +1,34 @@
+#include "InitSDL.h"
+#include "Window.h"
+#include "ObjectLoader.h"
 #include <iostream>
-#include <vector>
-
+#include "Shader.h"
+#include "Texture.h"
+#include "Mesh.h"
+#include "ModelData.h"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-
-#include "Display.h"
-#include "Mesh.h"
-#include "ObjectLoader.h"
-#include "Shader.h"
-#include "Transform.h"
-#include "Texture.h"
-#include "ModelData.h"
 
 float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
-    Display display (800, 600, "Solar Simulator");
-    ModelData objectData = ModelData();
-    loadObject("samples/test.obj", objectData);
+    InitSDL InitSDL;
+    Window window (800, 600, "Solar Simulator");
+	ObjectLoader objectLoader;
 
-    std::vector<unsigned int>* indices = new std::vector<unsigned int>();
-    for (unsigned int i = 0; i < objectData.getSize(); i++)
+    if (!objectLoader.loadObject("samples/test.obj"))
     {
-        indices->push_back(i);
+        exit(EXIT_FAILURE);
     }
-    objectData.setIndices(indices);
-    float scale = getGreatestValue(&(objectData.getPos())[0], objectData.getSize());
+    const ModelData* objectData = objectLoader.getModel();
+
+    float scale = (getGreatestValue(&(objectData->getPos())[0], objectData->getSize()));
 
     std::cout << "The greatest value is " << scale << std::endl;
-    std::cout << "Number of faces: " << (objectData.getSize() + 1) / 3 << std::endl;
+    std::cout << "Number of faces: " << (objectData->getSize() + 1) / 3 << std::endl;
     Shader shader("./shaders/basicShader");
-    Mesh mesh(objectData);
+    Mesh mesh(*objectData);
     Texture texture("./textures/bricks.jpg");
     Transform transform;
 
@@ -41,9 +38,9 @@ int main(int argc, char **argv)
     transform.getScale()->y = 1 / (scale);
     transform.getScale()->z = 1 / (scale);
 
-    while (!display.IsClosed())
+    while (!window.IsClosed())
     {
-        display.Clear(0.0f, 0.0f, 0.0f, 1.0f);
+        window.Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
         transform.getRot()->y = counter; //rotate about the y-axis
         transform.getRot()->z = counter;
@@ -53,11 +50,10 @@ int main(int argc, char **argv)
         texture.Bind(0);
         mesh.Draw();
 
-        display.Update();
+        window.Update();
         counter += 0.0002f;
     }
 
-    delete[] indices;
     return 0;
 }
 
