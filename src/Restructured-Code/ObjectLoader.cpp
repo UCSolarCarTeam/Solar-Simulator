@@ -118,3 +118,9 @@ bool ObjectLoader::loadObject(const char* path)
     return true;
 }
 
+ObjectLoader::~ObjectLoader()
+{
+    delete out_vertices;
+    delete out_texCoords;
+    delete out_normals;
+}

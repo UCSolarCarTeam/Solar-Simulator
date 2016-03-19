@@ -15,6 +15,7 @@ public:
 	bool loadObject(const char* path, ModelData& data);
 	ObjectLoader(const ObjectLoader&) = delete;
     void operator=(const ObjectLoader&) = delete;
+    virtual ~ObjectLoader();
 
 private:
 	ModelData * data_;
