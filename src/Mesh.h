@@ -8,7 +8,7 @@
 class Mesh
 {
 public:
-	Mesh(ModelData& modelData);
+    Mesh(ModelData& modelData);
     virtual ~Mesh();
     Mesh(const Mesh&) = delete;
     void operator=(const Mesh&) = delete;
@@ -18,8 +18,8 @@ private:
     enum
     {
         POSITION_VB,
-		TEXCOORD_VB,
-		NORMAL_VB,
+        TEXCOORD_VB,
+        NORMAL_VB,
         INDEX_VB,
         NUM_BUFFERS
     };
