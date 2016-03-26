@@ -2,7 +2,7 @@
 
 #include <string>
 #include <GL/glew.h>
-#include "ImageData.h"
+#include "../Data/ImageData.h"
 
 class Texture
 {

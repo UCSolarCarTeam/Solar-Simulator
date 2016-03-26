@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 
 #include "FileLoader.h"
-#include "Mesh.h"
+#include "../Presenter/Mesh.h"
 #include "stb_image.h"
 
 

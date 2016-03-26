@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-#include "ModelData.h"
+#include "../Data/ModelData.h"
 
 class Mesh
 {

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "ModelData.h"
-#include "ImageData.h"
+#include "../Data/ModelData.h"
+#include "../Data/ImageData.h"
 #include <string>
 #include <glm/glm.hpp>
 
