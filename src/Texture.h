@@ -2,11 +2,12 @@
 
 #include <string>
 #include <GL/glew.h>
+#include "ImageData.h"
 
 class Texture
 {
 public:
-    Texture(const std::string& fileName);
+    Texture(ImageData& textureData);
     void Bind(unsigned int unit);
     virtual ~Texture();
     Texture(const Texture& other) = delete;

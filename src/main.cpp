@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "FileLoader.h"
+#include "ImageData.h"
 #include <iostream>
 #include "Shader.h"
 #include "Texture.h"
@@ -13,7 +14,7 @@ float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
-    Window window (800, 600, "Solar Simulator");
+    Window window(800, 600, "Solar Simulator");
     FileLoader fileLoader;
 
     if (!fileLoader.loadObject("samples/test.obj"))
@@ -32,7 +33,11 @@ int main(int argc, char **argv)
 
     Shader shader(vertexShader, fragmentShader);
     Mesh mesh(*objectData);
-    Texture texture("./textures/bricks.jpg");
+
+    ImageData textureData;
+    fileLoader.loadTextures(textureData, "./textures/bricks.jpg");
+    Texture texture(textureData);
+
     Transform transform;
 
     float counter = 0.0f;

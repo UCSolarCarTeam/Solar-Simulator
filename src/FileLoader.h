@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "ModelData.h"
+#include "ImageData.h"
 #include <string>
 #include <glm/glm.hpp>
 
@@ -13,6 +14,7 @@ public:
 	const ModelData* getModel();
 	bool loadObject(const char* path);
     std::string loadShader(const std::string& fileName);
+    bool loadTextures(ImageData& data, const std::string& fileName);
 
     FileLoader(const FileLoader&) = delete;
     void operator=(const FileLoader&) = delete;

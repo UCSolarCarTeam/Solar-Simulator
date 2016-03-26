@@ -2,11 +2,13 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include <glm/glm.hpp>
 
 #include "FileLoader.h"
 #include "Mesh.h"
+#include "stb_image.h"
 
 
 FileLoader::FileLoader()
@@ -140,6 +142,17 @@ std::string FileLoader::loadShader(const std::string & fileName)
     }
 
     return output;
+}
+
+bool FileLoader::loadTextures(ImageData& data, const std::string& fileName)
+{
+    data.setImageData(stbi_load(fileName.c_str(), data.getWidth(), data.getHeight(), data.getNumComponents(), 4));
+    if (data.getImageData() == NULL)
+    {
+        std::cerr << "Error! Texture failed to load for texture: " << fileName << std::endl;
+        return false;
+    }
+    return true;
 }
 
 FileLoader::~FileLoader()
