@@ -13,13 +13,8 @@
 
 FileLoader::FileLoader()
 {
-    data_ = new ModelData();
 }
 
-const ModelData* FileLoader::getModel()
-{
-    return data_;
-}
 
 /**
  * Here is a short list of features a real function would provide :
@@ -30,7 +25,7 @@ const ModelData* FileLoader::getModel()
  *  - More secure. Change another line and you can inject code.
  *  - Loading from memory, stream, etc
  */
-bool FileLoader::loadObject(const char* path)
+bool FileLoader::loadObject(ModelData& data, const char* path)
 {
     std::cout << "Loading OBJ file " << path << "..." << std::endl;
 
@@ -104,17 +99,17 @@ bool FileLoader::loadObject(const char* path)
 		out_normals->push_back(temp_normals[normalIndex - 1]);
 		out_texCoords->push_back(glm::vec2(0.2, 0.2)); //Set the texture coordinate to an arbitrary value
     }
-	data_->setPos(out_vertices);// Put the attributes in buffers
-	data_->setNormal(out_normals);
-	data_->setTexCoord(out_texCoords);
-	data_->setSize(data_->getPos().size());
+	data.setPos(out_vertices);// Put the attributes in buffers
+	data.setNormal(out_normals);
+	data.setTexCoord(out_texCoords);
+	data.setSize(data.getPos().size());
 
     std::vector<unsigned int>* indices = new std::vector<unsigned int>();  
-    for (unsigned int i = 0; i < data_->getSize(); i++)
+    for (unsigned int i = 0; i < data.getSize(); i++)
     {
         indices->push_back(i);
     }
-    data_->setIndices(indices);
+    data.setIndices(indices);
 
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return true;

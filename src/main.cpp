@@ -16,23 +16,22 @@ int main(int argc, char **argv)
 {
     Window window(800, 600, "Solar Simulator");
     FileLoader fileLoader;
-
-    if (!fileLoader.loadObject("samples/test.obj"))
+    ModelData objectData;
+    if (!fileLoader.loadObject(objectData, "samples/test.obj"))
     {
         exit(EXIT_FAILURE);
     }
-    const ModelData* objectData = fileLoader.getModel();
 
-    float scale = (getGreatestValue(&(objectData->getPos())[0], objectData->getSize()));
+    float scale = (getGreatestValue(&(objectData.getPos())[0], objectData.getSize()));
 
     std::cout << "The greatest value is " << scale << std::endl;
-    std::cout << "Number of faces: " << (objectData->getSize() + 1) / 3 << std::endl;
+    std::cout << "Number of faces: " << (objectData.getSize() + 1) / 3 << std::endl;
 
     std::string vertexShader = fileLoader.loadShader("./shaders/basicShader.vs");
     std::string fragmentShader = fileLoader.loadShader("./shaders/basicShader.fs");
-
     Shader shader(vertexShader, fragmentShader);
-    Mesh mesh(*objectData);
+
+    Mesh mesh(objectData);
 
     ImageData textureData;
     fileLoader.loadTextures(textureData, "./textures/bricks.jpg");

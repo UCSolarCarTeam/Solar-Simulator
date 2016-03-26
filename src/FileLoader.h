@@ -11,17 +11,14 @@ class FileLoader
 {
 public:
     FileLoader();
-	const ModelData* getModel();
-	bool loadObject(const char* path);
-    std::string loadShader(const std::string& fileName);
+	bool loadObject(ModelData& data, const char* path);
     bool loadTextures(ImageData& data, const std::string& fileName);
+    std::string loadShader(const std::string& fileName);
 
     FileLoader(const FileLoader&) = delete;
     void operator=(const FileLoader&) = delete;
     virtual ~FileLoader();
-
 private:
-	ModelData * data_;
 };
 
 
