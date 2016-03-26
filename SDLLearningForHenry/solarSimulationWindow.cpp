@@ -5,8 +5,7 @@
 #include <iostream>
 #include <SDL_ttf.h>
 #include <cmath>
-#include <QApplication>
-#include <QFileDialog>
+#include <FL/Fl_Native_File_Chooser.H>
 
 using namespace std;
 
@@ -102,12 +101,26 @@ void close() {
 	gWindow = NULL;
     gSurface = NULL;
 
-    delete qApp;
-
 	//Quit SDL subsystems
     TTF_Quit();
 	SDL_Quit();
 }
+
+void openFile() {
+    // Create the file chooser
+    printf("Test1\n");
+    Fl_Native_File_Chooser* fnfc = new Fl_Native_File_Chooser();
+    fnfc->title("Hello Bryson!");
+    fnfc->type(Fl_Native_File_Chooser::BROWSE_FILE);
+    // Show native file chooser
+    switch(fnfc->show()) {
+        case -1: printf("ERROR: %s\n", fnfc->errmsg()); break;
+        case 1: printf("CANCEL\n"); break;
+        default: printf("PICKED: %s\n", fnfc->filename()); break;
+    }
+    delete fnfc;
+}
+
 
 void loadFromRenderedText(std::string buttonText, SDL_Color textColor) {
     if (gTextTexture != NULL) {
@@ -132,9 +145,6 @@ SDL_Rect createButton(int x, int y) {
 }
 
 void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
-    QString fileName;
-    QString filters("All files (*.*)");
-
     if (e-> type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
         // Get mouse position
         int x, y;
@@ -165,10 +175,7 @@ void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
 
                 case SDL_MOUSEBUTTONUP:
                 printf("I am being released.\n");
-                /* Static method approach */
-                fileName = QFileDialog::getOpenFileName(0, "Open file", QDir::currentPath(),
-                filters, NULL, QFileDialog::DontUseNativeDialog);
-                std::cout << "The file path is " + fileName.toStdString() <<  std::endl;
+                openFile();
                 break;
             }
         }
@@ -186,7 +193,6 @@ int main( int argc, char* args[] ) {
 		bool quit = false;
 
         // Initialize variables (will migrate to classes later :P)
-        QApplication app(argc, args);
         int browseButtonX = 50;
         int browseButtonY = 50;
         SDL_Rect browseButton = createButton(browseButtonX, browseButtonY);
