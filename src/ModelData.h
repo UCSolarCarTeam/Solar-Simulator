@@ -1,5 +1,4 @@
-#ifndef MODELDATA_H
-#define MODELDATA_H
+#pragma once
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -29,4 +28,3 @@ private:
 	unsigned int numVertices_;
 };
 
-#endif

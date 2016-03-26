@@ -1,5 +1,4 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#pragma once
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
@@ -46,4 +45,4 @@ private:
     glm::vec3 scale_;
 };
 
-#endif
+

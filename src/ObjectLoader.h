@@ -1,5 +1,4 @@
-#ifndef OBJLOADER_H
-#define OBJLOADER_H
+#pragma once
 
 #include <vector>
 #include "ModelData.h"
@@ -21,4 +20,4 @@ private:
 	ModelData * data_;
 };
 
-#endif
+

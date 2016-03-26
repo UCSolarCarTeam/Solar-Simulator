@@ -1,5 +1,4 @@
-#ifndef Window_H
-#define Window_H
+#pragma once
 
 #include <string>
 
@@ -23,4 +22,4 @@ private:
     SDL_GLContext glContext_;
 };
 
-#endif
+

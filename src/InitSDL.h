@@ -1,5 +1,4 @@
-#ifndef INITSDL_H
-#define INITSDL_H
+#pragma once
 
 #include <string>
 
@@ -18,4 +17,4 @@ private:
     
 };
 
-#endif
+

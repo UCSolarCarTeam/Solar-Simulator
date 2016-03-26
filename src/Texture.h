@@ -1,5 +1,5 @@
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#pragma once
+
 #include <string>
 #include <GL/glew.h>
 
@@ -17,4 +17,3 @@ private:
 };
 
 
-#endif

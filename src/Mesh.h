@@ -1,5 +1,4 @@
-#ifndef MESH_H
-#define MESH_H
+#pragma once
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -28,4 +27,4 @@ private:
     unsigned int drawCount_;
 };
 
-#endif
+
