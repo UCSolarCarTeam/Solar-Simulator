@@ -31,12 +31,10 @@ public:
         return (posMatrix * rotMatrix * scaleMatrix);
     }
 
-    inline glm::vec3* getPos() { return &position_; }
-    inline glm::vec3* getRot() { return &rotation_; }
-    inline glm::vec3* getScale() { return &scale_; }
-
     inline void setPos(glm::vec3& position) { position_ = position; }
-    inline void setRot(glm::vec3& rotation) { rotation_ = rotation; }
+    inline void setXRot(float x) { rotation_.x = x; }
+    inline void setYRot(float y) { rotation_.y = y; }
+    inline void setZRot(float z) { rotation_.z = z; }
     inline void setScale(float scale) { scale_ = glm::vec3(scale, scale, scale);}
 
 private:

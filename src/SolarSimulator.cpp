@@ -52,8 +52,8 @@ void SolarSimulator::run()
     {
         window.Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
-        transform.getRot()->y = counter; //rotate about the y-axis
-        transform.getRot()->z = counter;
+        transform.setYRot(counter); //Rotate about y axis
+        transform.setZRot(counter);
 
         shader.Bind();
         shader.Update(transform);
