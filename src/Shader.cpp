@@ -1,13 +1,12 @@
-#include <fstream>
 #include <iostream>
 
 #include "Shader.h"
 
-Shader::Shader(const std::string& fileName)
+Shader::Shader(const std::string& vertexShader, const std::string& fragmentShader)
 {
     program_ = glCreateProgram();
-    shaders_[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-    shaders_[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+    shaders_[0] = CreateShader(vertexShader, GL_VERTEX_SHADER);
+    shaders_[1] = CreateShader(fragmentShader, GL_FRAGMENT_SHADER);
 
     for (unsigned int i = 0; i < NUM_SHADERS; i++)
     {
@@ -61,29 +60,6 @@ GLuint Shader::CreateShader(const std::string& text, unsigned int type)
     return shader;
 }
 
-std::string Shader::LoadShader(const std::string& fileName)
-{
-    std::ifstream file;
-    file.open((fileName).c_str());
-
-    std::string output;
-    std::string line;
-
-    if (file.is_open())
-    {
-        while (file.good())
-        {
-            getline(file, line);
-            output.append(line + "\n");
-        }
-    }
-    else
-    {
-        std::cerr << "Unable to load shader: " << fileName << std::endl;
-    }
-
-    return output;
-}
 
 void Shader::Bind()
 {

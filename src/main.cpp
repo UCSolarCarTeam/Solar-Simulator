@@ -7,25 +7,30 @@
 #include "ModelData.h"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <string>
 
 float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
     Window window (800, 600, "Solar Simulator");
-    FileLoader objectLoader;
+    FileLoader fileLoader;
 
-    if (!objectLoader.loadObject("samples/test.obj"))
+    if (!fileLoader.loadObject("samples/test.obj"))
     {
         exit(EXIT_FAILURE);
     }
-    const ModelData* objectData = objectLoader.getModel();
+    const ModelData* objectData = fileLoader.getModel();
 
     float scale = (getGreatestValue(&(objectData->getPos())[0], objectData->getSize()));
 
     std::cout << "The greatest value is " << scale << std::endl;
     std::cout << "Number of faces: " << (objectData->getSize() + 1) / 3 << std::endl;
-    Shader shader("./shaders/basicShader");
+
+    std::string vertexShader = fileLoader.loadShader("./shaders/basicShader.vs");
+    std::string fragmentShader = fileLoader.loadShader("./shaders/basicShader.fs");
+
+    Shader shader(vertexShader, fragmentShader);
     Mesh mesh(*objectData);
     Texture texture("./textures/bricks.jpg");
     Transform transform;

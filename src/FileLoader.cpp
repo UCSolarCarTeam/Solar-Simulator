@@ -1,6 +1,6 @@
 #include <cstring>
+#include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -116,6 +116,30 @@ bool FileLoader::loadObject(const char* path)
 
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return true;
+}
+
+std::string FileLoader::loadShader(const std::string & fileName)
+{
+    std::ifstream file;
+    file.open((fileName).c_str());
+
+    std::string output;
+    std::string line;
+
+    if (file.is_open())
+    {
+        while (file.good())
+        {
+            getline(file, line);
+            output.append(line + "\n");
+        }
+    }
+    else
+    {
+        std::cerr << "Unable to load shader: " << fileName << std::endl;
+    }
+
+    return output;
 }
 
 FileLoader::~FileLoader()
