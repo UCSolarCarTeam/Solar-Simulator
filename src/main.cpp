@@ -1,6 +1,5 @@
-#include "InitSDL.h"
 #include "Window.h"
-#include "ObjectLoader.h"
+#include "FileLoader.h"
 #include <iostream>
 #include "Shader.h"
 #include "Texture.h"
@@ -13,9 +12,8 @@ float getGreatestValue(const glm::vec3* verticesArray, unsigned int size);
 
 int main(int argc, char **argv)
 {
-    InitSDL InitSDL;
     Window window (800, 600, "Solar Simulator");
-	ObjectLoader objectLoader;
+    FileLoader objectLoader;
 
     if (!objectLoader.loadObject("samples/test.obj"))
     {

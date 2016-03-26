@@ -6,15 +6,15 @@
 #include <glm/glm.hpp>
 
 
-class ObjectLoader
+class FileLoader
 {
 public:
-	ObjectLoader();
+    FileLoader();
 	const ModelData* getModel();
 	bool loadObject(const char* path);
-	ObjectLoader(const ObjectLoader&) = delete;
-    void operator=(const ObjectLoader&) = delete;
-    virtual ~ObjectLoader();
+    FileLoader(const FileLoader&) = delete;
+    void operator=(const FileLoader&) = delete;
+    virtual ~FileLoader();
 
 private:
 	ModelData * data_;

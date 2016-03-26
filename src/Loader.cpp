@@ -5,16 +5,16 @@
 
 #include <glm/glm.hpp>
 
-#include "ObjectLoader.h"
+#include "FileLoader.h"
 #include "Mesh.h"
 
 
-ObjectLoader::ObjectLoader()
+FileLoader::FileLoader()
 {
     data_ = new ModelData();
 }
 
-const ModelData* ObjectLoader::getModel()
+const ModelData* FileLoader::getModel()
 {
     return data_;
 }
@@ -28,7 +28,7 @@ const ModelData* ObjectLoader::getModel()
  *  - More secure. Change another line and you can inject code.
  *  - Loading from memory, stream, etc
  */
-bool ObjectLoader::loadObject(const char* path)
+bool FileLoader::loadObject(const char* path)
 {
     std::cout << "Loading OBJ file " << path << "..." << std::endl;
 
@@ -118,7 +118,7 @@ bool ObjectLoader::loadObject(const char* path)
     return true;
 }
 
-ObjectLoader::~ObjectLoader()
+FileLoader::~FileLoader()
 {
 
 }

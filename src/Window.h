@@ -12,6 +12,7 @@ public:
     Window(const Window&) = delete;
     void operator=(const Window&) = delete;
 
+    void initSDL();
     void Update();
     bool IsClosed();
     void Clear(float red, float green, float blue, float alpha);
