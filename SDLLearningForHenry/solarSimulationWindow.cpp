@@ -5,7 +5,10 @@
 #include <iostream>
 #include <SDL_ttf.h>
 #include <cmath>
-#include <FL/Fl_Native_File_Chooser.H>
+#include <FL/Fl.H>
+#include <FL/Fl_Window.H>
+#include <FL/Fl_Menu_Bar.H>
+#include <FL/Fl_File_Chooser.H>
 
 using namespace std;
 
@@ -106,19 +109,30 @@ void close() {
 	SDL_Quit();
 }
 
+
 void openFile() {
     // Create the file chooser
-    printf("Test1\n");
-    Fl_Native_File_Chooser* fnfc = new Fl_Native_File_Chooser();
-    fnfc->title("Hello Bryson!");
-    fnfc->type(Fl_Native_File_Chooser::BROWSE_FILE);
-    // Show native file chooser
-    switch(fnfc->show()) {
-        case -1: printf("ERROR: %s\n", fnfc->errmsg()); break;
-        case 1: printf("CANCEL\n"); break;
-        default: printf("PICKED: %s\n", fnfc->filename()); break;
+    Fl_File_Chooser chooser (".", "*", Fl_File_Chooser::MULTI, "Hello Enoch");
+
+    chooser.show(); // Display chooser
+
+    while (chooser.shown()) {
+        Fl::run(); // Wait until "something happens"
     }
-    delete fnfc;
+
+    //Causes all the windows that need it to be redrawn and graphics forced out
+    // through the pipes 
+    Fl::flush();
+
+    // Current value of selected files
+    if (chooser.value() == NULL) {
+        printf("User hit cancel\n");
+    } else {
+        printf("*******************\n");
+        printf("Directory: '%s'\n", chooser.directory());
+        printf("    Value: '%s'\n", chooser.value());
+    }
+
 }
 
 
