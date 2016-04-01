@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "Transform.h"
+#include "../../src/Data/Transform.h"
 
 class TransformTest : public ::testing::Test {
 protected:
