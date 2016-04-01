@@ -30,15 +30,15 @@ public:
         glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
         return (posMatrix * rotMatrix * scaleMatrix);
     }
-    inline const std::vector<glm::vec3>& getPos() const
+    inline const glm::vec3& getPos() const
     {
         return position_;
     }
-    inline const std::vector<glm::vec3>& getRot() const
+    inline const glm::vec3& getRot() const
     {
         return rotation_;
     }
-    inline const std::vector<glm::vec3>& getScale() const
+    inline const glm::vec3& getScale() const
     {
         return scale_;
     }
