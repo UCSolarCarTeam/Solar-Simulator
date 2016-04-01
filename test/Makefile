@@ -1,4 +1,4 @@
-OBJS = ../src/*.cpp ../src/Logic/*.c ../src/Logic/*.cpp ../src/Presenter/*.cpp ../src/Data/*.cpp ../src/View/*.cpp
+OBJS = $(filter-out ../src/main.cpp, $(../src/*.cpp)) ../src/Logic/*.c ../src/Logic/*.cpp ../src/Presenter/*.cpp ../src/Data/*.cpp ../src/View/*.cpp
 
 COMPILE_FLAGS = -g -std=c++11 -Werror
 
