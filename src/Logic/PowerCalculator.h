@@ -8,10 +8,12 @@
 class PowerCalculator
 {
 public:
-	double calculateTotalPower(ModelData& data, glm::vec3& solarArray) const;
-	bool isOuterTriangle(glm::vec3& normalVector) const;
-	glm::vec3 getNormalVector(ModelData& data, int triangleIndex) const;
+    PowerCalculator();
+    float calculateTotalPower(ModelData& data, glm::vec3& solarArray) const;
+    bool isOuterTriangle(glm::vec3& normalVector) const;
+    glm::vec3 getNormalVector(ModelData& data, int triangleIndex) const;
 private:
-
+    float actualPower_;
+    float maximumPower_;
 };
 
