@@ -2,7 +2,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -26,3 +25,9 @@
 *.exe
 *.out
 *.app
+SolarSimulator
+RunTests
+
+# OS Files
+.DS_Store
+.fuse*

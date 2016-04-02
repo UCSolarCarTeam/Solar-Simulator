@@ -1,22 +1,21 @@
-#OBJS = files to compile
-OBJS = SDLLearningForHenry/solarSimulationWindow.cpp
-#CC = compiler used
-CC = g++
+# Source Files
+OBJS = src/*.cpp src/Logic/*.c src/Logic/*.cpp src/Presenter/*.cpp src/Data/*.cpp src/View/*.cpp
 
-#COMPLIE_FLAGS = additional flags
-COMPILE_FLAGS = -w -g -std=c++0x
+# Additional Flags
+COMPILE_FLAGS = -g -std=c++11 -Werror
 
-LINK_FLAGS =`fltk-config --use-gl --use-images --cxxflags --ldflags --ldstaticflags` `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -ltiff
+#Program Name
+OUTPUT_NAME = SolarSimulator
 
+# Required Libraries to Link
+LINK_FLAGS =`fltk-config --use-gl --use-images --cxxflags --ldflags --ldstaticflags` `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -ltiff 
+-lGLEW -lGL -lGLU -pthread
 
-#OUTPUT_NAME = final name
-OUTPUT_NAME = hello
-
-#INCLUDE FLAGS
-INCLUDE_FLAGS = -Ilib -Iinclude
+# Headers to Include
+INCLUDE_FLAGS = -Ilib -Iinclude 
 
 all :
-	 $(CC) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) -o $(OUTPUT_NAME) -pthread
+	$(CXX) $(OBJS) $(INCLUDE_FLAGS) $(LINK_FLAGS) $(COMPILE_FLAGS) $(LIBS) -o $(OUTPUT_NAME) 
 
 clean :
-	rm hello
+	rm $(OUTPUT_NAME)
