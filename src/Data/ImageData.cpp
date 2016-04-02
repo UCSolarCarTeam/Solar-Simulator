@@ -6,7 +6,7 @@ ImageData::ImageData()
 {
 }
 
-int* ImageData::getWidth() 
+int* ImageData::getWidth()
 {
     return &width_;
 }
@@ -16,7 +16,7 @@ int* ImageData::getHeight()
     return &height_;
 }
 
-int* ImageData::getNumComponents() 
+int* ImageData::getNumComponents()
 {
     return &numComponents_;
 }
