@@ -1,12 +1,20 @@
 #include <cstring>
+#include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
+#include <string>
 
 #include <glm/glm.hpp>
 
-#include "ObjectLoader.h"
-#include "Mesh.h"
+#include "FileLoader.h"
+#include "../Presenter/Mesh.h"
+#include "stb_image.h"
+
+
+FileLoader::FileLoader()
+{
+}
+
 
 /**
  * Here is a short list of features a real function would provide :
@@ -17,8 +25,7 @@
  *  - More secure. Change another line and you can inject code.
  *  - Loading from memory, stream, etc
  */
-
-bool loadObject(const char* path, ModelData& data)
+bool FileLoader::loadObject(ModelData& data, const char* path)
 {
     std::cout << "Loading OBJ file " << path << "..." << std::endl;
 
@@ -96,6 +103,54 @@ bool loadObject(const char* path, ModelData& data)
     data.setNormal(out_normals);
     data.setTexCoord(out_texCoords);
     data.setSize(data.getPos().size());
+
+    std::vector<unsigned int>* indices = new std::vector<unsigned int>();
+    for (unsigned int i = 0; i < data.getSize(); i++)
+    {
+        indices->push_back(i);
+    }
+    data.setIndices(indices);
+
     std::cout << "The .obj file was loaded successfully!" << std::endl;
     return true;
+}
+
+std::string FileLoader::loadShader(const std::string & fileName)
+{
+    std::ifstream file;
+    file.open((fileName).c_str());
+
+    std::string output;
+    std::string line;
+
+    if (file.is_open())
+    {
+        while (file.good())
+        {
+            getline(file, line);
+            output.append(line + "\n");
+        }
+    }
+    else
+    {
+        std::cerr << "Unable to load shader: " << fileName << std::endl;
+    }
+
+    return output;
+}
+
+bool FileLoader::loadTextures(ImageData& data, const std::string& fileName)
+{
+    data.setImageData(stbi_load(fileName.c_str(), data.getWidth(), data.getHeight(), data.getNumComponents(), 4));
+    if (data.getImageData() == NULL)
+    {
+        std::cerr << "Error! Texture failed to load for texture: " << fileName << std::endl;
+        return false;
+    }
+    return true;
+}
+
+FileLoader::~FileLoader()
+{
+
 }

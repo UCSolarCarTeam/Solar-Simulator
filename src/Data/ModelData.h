@@ -1,5 +1,4 @@
-#ifndef MODELDATA_H
-#define MODELDATA_H
+#pragma once
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -20,7 +19,7 @@ public:
     void setTexCoord(std::vector<glm::vec2>* texCoord);
     void setNormal(std::vector<glm::vec3>* normal);
     void setIndices(std::vector<unsigned int>* indicies);
-
+    virtual ~ModelData();
 private:
     std::vector<glm::vec3>* position_;
     std::vector<glm::vec2>* texCoord_;
@@ -29,4 +28,3 @@ private:
     unsigned int numVertices_;
 };
 
-#endif

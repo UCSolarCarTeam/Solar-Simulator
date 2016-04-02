@@ -1,5 +1,4 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#pragma once
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
@@ -31,14 +30,23 @@ public:
         glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
         return (posMatrix * rotMatrix * scaleMatrix);
     }
-
-    inline glm::vec3* getPos() { return &position_; }
-    inline glm::vec3* getRot() { return &rotation_; }
-    inline glm::vec3* getScale() { return &scale_; }
-
+    inline const glm::vec3& getPos() const
+    {
+        return position_;
+    }
+    inline const glm::vec3& getRot() const
+    {
+        return rotation_;
+    }
+    inline const glm::vec3& getScale() const
+    {
+        return scale_;
+    }
     inline void setPos(glm::vec3& position) { position_ = position; }
-    inline void setRot(glm::vec3& rotation) { rotation_ = rotation; }
-    inline void setScale(glm::vec3& scale) { scale_ = scale; }
+    inline void setXRot(float x) { rotation_.x = x; }
+    inline void setYRot(float y) { rotation_.y = y; }
+    inline void setZRot(float z) { rotation_.z = z; }
+    inline void setScale(float scale) { scale_ = glm::vec3(scale, scale, scale);}
 
 private:
     glm::vec3 position_;
@@ -46,4 +54,4 @@ private:
     glm::vec3 scale_;
 };
 
-#endif
+

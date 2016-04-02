@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Mesh.h"
 
-Mesh::Mesh(ModelData& objectData)
+Mesh::Mesh(const ModelData& objectData)
     : drawCount_(objectData.getSize())
 {
     const glm::vec3* vertices = &(objectData.getPos())[0];

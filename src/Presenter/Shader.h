@@ -1,16 +1,15 @@
-#ifndef SHADER_H
-#define SHADER_H
+#pragma once
 
 #include <string>
 
 #include <GL/glew.h>
 
-#include "Transform.h"
+#include "../Data/Transform.h"
 
 class Shader
 {
 public:
-    Shader(const std::string& fileName);
+    Shader(const std::string& vertexShader, const std::string& fragmentShader);
     virtual ~Shader();
     Shader(const Shader&) = delete;
     void operator=(const Shader&) = delete;
@@ -21,7 +20,6 @@ public:
 private:
     static const unsigned int NUM_SHADERS = 2;
 
-    std::string LoadShader(const std::string& fileName);
     void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
     GLuint CreateShader(const std::string& text, unsigned int type);
 
@@ -37,4 +35,4 @@ private:
     GLuint uniforms_[NUM_UNIFORMS];
 };
 
-#endif
+
