@@ -35,7 +35,6 @@ SDL_Surface* gSurface = NULL;
 TTF_Font* gFont = NULL;
 SDL_Texture* gTextTexture = NULL;
 
-/*****************************************************************************/
 
 bool init() {
 	//Initialization flag
@@ -61,17 +60,17 @@ bool init() {
 			success = false;
 		} else {
 			// Create renderer for window
-            gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+            gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED); //WINDOW
 
             if (gRenderer == NULL) {
                 printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
                 success = false;
             } else {
                 // Initialize renderer color
-                SDL_SetRenderDrawColor(gRenderer, 250, 250, 210, 255);
+                SDL_SetRenderDrawColor(gRenderer, 250, 250, 210, 255); //WINDOW
 
                 // Initialize SDL_ttf
-                if (TTF_Init() == -1) {
+                if (TTF_Init() == -1) { //WINDOW
                     printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
                     success = false;
                 }
@@ -81,7 +80,7 @@ bool init() {
 	return success;
 }
 
-void createTexture() {
+void createTexture() { //WINDOW
 
     gSurface = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0, 0, 0, 0);
     SDL_FillRect(gSurface, NULL, SDL_MapRGB(gSurface->format, 255, 228, 181));
@@ -89,7 +88,7 @@ void createTexture() {
 
 }
 
-void close() {
+void close() { //WINDOW
 	//Destroy texture, renderer, window
     SDL_FreeSurface(gSurface);
     TTF_CloseFont(gFont);
@@ -110,7 +109,7 @@ void close() {
 }
 
 
-void openFile() {
+void openFile() { //WINDOW
     // Create the file chooser
     Fl_File_Chooser chooser (".", "*", Fl_File_Chooser::MULTI, "Hello Enoch");
 
@@ -136,7 +135,7 @@ void openFile() {
 }
 
 
-void loadFromRenderedText(std::string buttonText, SDL_Color textColor) {
+void loadFromRenderedText(std::string buttonText, SDL_Color textColor) { //WINDOW
     if (gTextTexture != NULL) {
         SDL_DestroyTexture(gTextTexture);
         gTextTexture = NULL;
@@ -153,12 +152,12 @@ void loadFromRenderedText(std::string buttonText, SDL_Color textColor) {
     SDL_FreeSurface(textSurface);
 }
 
-SDL_Rect createButton(int x, int y) {
+SDL_Rect createButton(int x, int y) { //WINDOW
     SDL_Rect button = {x, y, BUTTON_WIDTH, BUTTON_HEIGHT};
     return button;
 }
 
-void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
+void handleEvent(SDL_Event* e, int buttonX, int buttonY) { //WINDOW
     if (e-> type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
         // Get mouse position
         int x, y;
@@ -196,7 +195,6 @@ void handleEvent(SDL_Event* e, int buttonX, int buttonY) {
     }
 }
 
-/******************************************************************************/
 
 int main( int argc, char* args[] ) {
 	//Start up SDL and create window
@@ -229,7 +227,7 @@ int main( int argc, char* args[] ) {
         bottomViewport.h = SCREEN_HEIGHT / 4;
 
 		//While application is running
-		while(!quit) {
+		while(!quit) {                                //SHOULD BE IN MAIN SUPERLOOP
 			//Handle events on queue
 			while(SDL_PollEvent(&e) != 0) {
 				//User requests quit
@@ -242,7 +240,7 @@ int main( int argc, char* args[] ) {
             SDL_SetRenderDrawColor(gRenderer, 250, 250, 210, 255);
             SDL_RenderClear(gRenderer);
 
-            SDL_RenderSetViewport(gRenderer, &bottomViewport);
+            SDL_RenderSetViewport(gRenderer, &bottomViewport); //ALLOCATE SPACE FOR RENDERING OPENGL
             SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
 
             SDL_SetRenderDrawColor(gRenderer, 220, 220, 190, 255);
