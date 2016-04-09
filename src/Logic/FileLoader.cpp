@@ -87,24 +87,24 @@ bool FileLoader::loadObject(ModelData& data, const char* path)
             commentLines++;
         }
     }
-    std::vector <glm::vec3>* out_vertices = new std::vector <glm::vec3> ();
-    std::vector <glm::vec2>* out_texCoords = new std::vector <glm::vec2> ();
-    std::vector <glm::vec3>* out_normals = new std::vector <glm::vec3> ();
+	std::vector <glm::vec3>* out_vertices = new std::vector <glm::vec3> ();
+	std::vector <glm::vec2>* out_texCoords = new std::vector <glm::vec2> ();
+	std::vector <glm::vec3>* out_normals = new std::vector <glm::vec3> ();
     for ( unsigned int i = 0; i < vertexIndices.size(); i++ ) // For each vertex get indices of attributes
     {
         unsigned int vertexIndex = vertexIndices[i];
         unsigned int normalIndex = normalIndices[i];
 
         out_vertices->push_back(temp_vertices[vertexIndex - 1]); // Get the attributes thanks to the index
-        out_normals->push_back(temp_normals[normalIndex - 1]);
-        out_texCoords->push_back(glm::vec2(0.2, 0.2)); //Set the texture coordinate to an arbitrary value
+		out_normals->push_back(temp_normals[normalIndex - 1]);
+		out_texCoords->push_back(glm::vec2(0.2, 0.2)); //Set the texture coordinate to an arbitrary value
     }
-    data.setPos(out_vertices);// Put the attributes in buffers
-    data.setNormal(out_normals);
-    data.setTexCoord(out_texCoords);
-    data.setSize(data.getPos().size());
+	data.setPos(out_vertices);// Put the attributes in buffers
+	data.setNormal(out_normals);
+	data.setTexCoord(out_texCoords);
+	data.setSize(data.getPos().size());
 
-    std::vector<unsigned int>* indices = new std::vector<unsigned int>();
+    std::vector<unsigned int>* indices = new std::vector<unsigned int>();  
     for (unsigned int i = 0; i < data.getSize(); i++)
     {
         indices->push_back(i);
