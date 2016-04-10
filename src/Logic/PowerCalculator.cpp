@@ -1,7 +1,7 @@
 #include "PowerCalculator.h"
 #include <iostream>
 
-PowerCalculator::PowerCalculator()
+PowerCalculator::PowerCalculator() //0.2264916W 100% power
 {
     actualPower_ = 0;
     maximumPower_ = 0;
@@ -18,9 +18,9 @@ float PowerCalculator::calculateTotalPower(ModelData& data, glm::vec3 & solarArr
     glm::vec3 nSolar = glm::normalize(solarArray);
     for (int i = 0; i < data.getSize(); i += 3)
     {
-        glm::vec3 normal = getNormalVector(data, i); //TODO NORMLIAZE?
+        glm::vec3 normal = getNormalVector(data, i); 
         normal = glm::normalize(normal);
-        angle = glm::acos(glm::dot(normal, nSolar)); //angle in radians
+        angle = glm::acos(glm::dot(normal, nSolar)); 
         if (isOuterTriangle(normal))
         {
             surfaceArea = calculateSurfaceArea(data, i);
@@ -44,7 +44,7 @@ bool PowerCalculator::isOuterTriangle(glm::vec3& normalVector) const
 {
     float dot = glm::dot(glm::vec3(0, 1, 0), normalVector);
     float angle = glm::acos(dot);
-    if (angle >= 1.5708) //angle >=90 TODO
+    if (angle >= 1.57079) //angle >=90
         return false;
     return true;
 }

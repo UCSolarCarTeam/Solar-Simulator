@@ -11,7 +11,7 @@ class FileLoader
 {
 public:
     FileLoader();
-    bool loadObject(ModelData& data, const char* path);
+	bool loadObject(ModelData& data, const char* path);
     bool loadTextures(ImageData& data, const std::string& fileName);
     std::string loadShader(const std::string& fileName);
 
